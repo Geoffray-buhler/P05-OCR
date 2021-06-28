@@ -14,11 +14,23 @@
 		<link rel="stylesheet" href="template/css/style.css" />
 	</head>
 	<body class="is-preload">
-    <div class="jumbotron"></div>
+    <div class="jumbotron">
+        <img class="avatar" src="template/img/Griffont_Termine.png"/>
+        <h1>BUHLER GEOFFRAY</h1>
+        <h2>Ça va durer longtemps ? Prends-toi un Griffont.</h2>  
+    </div>
     <div class="main">
         <nav>
-            <a class="menuadd {% if current == 'home' %}active{% endif %}" href="/">Accueil</a>
-            <a class="menuadd {% if current == 'contact' %}active{% endif %}" href="/contact">Contact</a>
+            <div>
+                <a class="menuadd {% if current == 'home' %}active{% endif %}" href="/">Accueil</a>
+                <a class="menuadd {% if current == 'contact' %}active{% endif %}" href="/contact">Contact</a>
+            </div>
+            <div>
+                <a class="menuadd icon brands fa-twitch" href="/"></a>
+                <a class="menuadd icon brands fa-twitter" href="/contact"></a>
+                <a class="menuadd icon brands fa-linkedin" href="/contact"></a>
+                <a class="menuadd icon brands fa-github" href="#"></a>
+            </div>
         </nav>
         <div class="content">
         {% block content %}
