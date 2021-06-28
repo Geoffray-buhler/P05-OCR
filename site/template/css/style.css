@@ -1,34 +1,48 @@
+
 body{
+    background-color: #0e2336;
     display: flex;
-}
-
-nav{
-    display: flex;
-    justify-content:space-around ;
-    align-items: center;
-    width: 100vw;
-}
-
-footer{
-    color: aqua;
-}
-
-h1{
-    color: blueviolet;
-}
-
-.main{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
 }
 
-.logo{
-    height: 100px;
+.main{
+    width: 75%;
 }
 
-.important{
-    color: blue;
+.menuadd{
+    width: 100px;
+    padding: 1rem;
+}
+
+.jumbotron{
+   height:80vh;
+}
+
+.content{
+    padding: 1rem;
+    background-color: #ffffff;
+}
+
+nav {
+    background-color: #ffffff50;
+    font-size: larger;  
+    display: flex;
+    justify-content: start;
+    margin: 0;
+}
+
+.active{
+    background-color: #ffffff;
+    color: #0e2336;
+}
+
+nav a{
+    text-decoration: none;
+    color: aquamarine;
+}
+
+nav a:hover{
+    color: blueviolet;
 }
