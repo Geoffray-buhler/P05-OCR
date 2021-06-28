@@ -1,0 +1,34 @@
+body{
+    display: flex;
+}
+
+nav{
+    display: flex;
+    justify-content:space-around ;
+    align-items: center;
+    width: 100vw;
+}
+
+footer{
+    color: aqua;
+}
+
+h1{
+    color: blueviolet;
+}
+
+.main{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.logo{
+    height: 100px;
+}
+
+.important{
+    color: blue;
+}

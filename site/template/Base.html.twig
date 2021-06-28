@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    {% block head %}
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="template/css/style.css" />
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+
+<body>
+    <nav><img class="logo" src="template/img/Griffont_Termine.png" alt="logo de mon site test"><a href="/">Home</a><a href="/contact">Contact</a></nav>
+    <section class="main" id="content">
+        {% block content %}{% endblock %}
+    </section>
+    <footer id="footer">
+        {% block footer %}
+        &copy; Copyright 2020 <a href="http://monsite.com">
+            Mon super Site</a>.
+        {% endblock %}
+    </footer>
+</body>
+
+</html>
