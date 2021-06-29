@@ -19,6 +19,10 @@ h1, h2, h3, h4, h5{
 
 a{text-decoration: none;color: rgb(0, 0, 0);}
 
+.icon{
+    padding: 1rem;
+}
+
 .main{
     width: 75%;
     display: flex;
