@@ -2,16 +2,15 @@
 include_once 'controlleurs/controlleur.php';
 $url = $_SERVER['REQUEST_URI'];
 if (parse_url($url)['path'] !== '/') {
-    switch (parse_url($url)) {
+    switch (parse_url($url)['path']) {
         case '/contact':
             contact();
         break;
         case '/home':
             home();
         break;
-        case '/*':
+        default:
             pages404();
-        break;
     }
 }else{
     home();

@@ -19,7 +19,7 @@ function home ()
     
         // set template variables
         // render template
-        echo $template->render(array(
+        echo $template->render(array('current'=>'home'
         ));
     
     } catch (Exception $e) {
@@ -37,11 +37,11 @@ function contact ()
         $twig = new Twig\Environment($loader);
     
         // load template
-        $template = $twig->load('contact.html.twig');
+        $template = $twig->load('pages/contact.html.twig');
     
         // set template variables
         // render template
-        echo $template->render(array(
+        echo $template->render(array('current'=>'contact'
         ));
     
     } catch (Exception $e) {
@@ -59,7 +59,7 @@ function pages404 ()
         $twig = new Twig\Environment($loader);
     
         // load template
-        $template = $twig->load('404.html.twig');
+        $template = $twig->load('pages/404.html.twig');
     
         // set template variables
         // render template
