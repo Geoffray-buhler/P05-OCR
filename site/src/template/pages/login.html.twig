@@ -1,0 +1,18 @@
+{% extends "/Base.html.twig" %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<h1>Connexion</h1>
+<form action="#" method="post">
+    <div class="d-flex m-1">
+        <input type="text" class="ml-1" placeholder="Login">
+        <input type="text" class="ml-1" placeholder="Mot de passe">
+    </div>
+    <input type="submit">
+</form>
+{% endblock %}

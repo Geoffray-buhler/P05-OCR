@@ -11,13 +11,19 @@
         {% block css %}{% endblock %}
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="template/css/style.css" />
+		<link rel="stylesheet" href="/css/style.css" />
 	</head>
 	<body class="is-preload">
     <div class="jumbotron">
-        <img class="avatar" src="template/img/Griffont_Termine.png"/>
+        <div>
+            <a href="/logon" class="{% if current == 'logon' %}white{% endif %}">Inscription</a> 
+            / 
+            <a href="/login" class="{% if current == 'login' %}white{% endif %}">Connexion</a>
+        </div>
+        <img class="avatar" src="/img/Griffont_Termine.png"/>
         <h1>BUHLER GEOFFRAY</h1>
-        <h2>Ça va durer longtemps ? Prends-toi un Griffont.</h2>  
+        <h2>Ça va durer longtemps ? Prends-toi un Griffont.</h2>
+        <p>{{current}}</p>
     </div>
     <div class="main">
         <nav>
@@ -33,8 +39,10 @@
             </div>
         </nav>
         <div class="content">
-        {% block content %}
-        {% endblock %}
+            <div class="d-flex center column">
+            {% block content %}
+            {% endblock %}
+            </div>
         </div>
     </div>
     <script src="https://kit.fontawesome.com/6e28c03334.js" crossorigin="anonymous"></script>

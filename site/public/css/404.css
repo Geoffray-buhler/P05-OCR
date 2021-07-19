@@ -42,15 +42,43 @@ body {
 }
 
 .container {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.container div{
   position: relative;
   margin: 0 auto;
   width: 85%;
-  height: 100vh;
+  height: 75vh;
   padding-bottom: 25vh;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
 }
+
+.container span{
+    position: relative;
+    margin: 0 auto;
+    width: 85%;
+    display: flex;
+}
+
+.column{
+  display: flex;
+  flex-direction: column;
+}
+
+.night{
+  text-align: center;
+  text-decoration: none;
+  color: #ffffff;
+  position: relative;
+  font-size: 7em;
+  line-height: 1.3em;
+  margin: 2rem 0 0.5rem 0;
+  padding: 0;
+  text-shadow: 0 0 1rem #fefefe;
+}
+
 @media (max-width: 770px) {
   .container {
     flex-direction: column;
@@ -172,3 +200,4 @@ body {
     text-shadow: 0 0 1rem #fefefe;
   }
 }
+

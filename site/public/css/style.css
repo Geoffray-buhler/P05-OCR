@@ -43,7 +43,7 @@ a{text-decoration: none;color: rgb(0, 0, 0);}
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height:80vh;
+    height:68vh;
     color: #ffffff80;
     width: 75%;
     background: rgba( 162, 162, 162, 0.15 );
@@ -59,9 +59,32 @@ a{text-decoration: none;color: rgb(0, 0, 0);}
     width: 210px;
 }
 
+.jumbotron div{
+    top: 10px;
+    right: 20px;
+    position: absolute; 
+}
+
+.jumbotron a{
+    color: #ffffff80;
+}
+
+.jumbotron a:hover{
+    color: #ffffff;
+}
+
 .content{
     padding: 1rem;
     background-color: #ffffff;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+}
+
+.white{
+    color:#ffffff!important;
 }
 
 nav {
@@ -78,6 +101,14 @@ nav {
     color: #0e2336;
 }
 
+.d-flex{
+    display: flex;
+}
+
+.column{
+    flex-direction: column;
+}
+
 nav a {
     transition: 1s;
 }
@@ -86,6 +117,18 @@ nav a:hover{
     color: rgb(0, 0, 0);
     background-color:#ffffff80;
     transition: 1s;
+}
+
+.m-1{
+    margin: 1rem;
+}
+
+.ml-1{
+    margin-left: 1rem;
+}
+
+.mr-1{
+    margin-right: 1rem;
 }
 
 @keyframes float {
