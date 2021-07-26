@@ -2,10 +2,10 @@
 
 namespace App;
 
-class ClassName
+class Debug
 {
-    function __construct($enter){
-        echo '<pre style="background-color: #000000; color:#ffff10">';
+    function vardump($enter){
+        echo '<pre style="background-color: #000000; color:#ffff10; padding:1rem;">';
         var_dump($enter);
         echo '</pre>';
     }

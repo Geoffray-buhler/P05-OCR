@@ -8,6 +8,10 @@
 
 {% block content %}
 <h1>Inscription</h1>
+{% if error %}
+    <p style="padding:1rem; background-color:#ff000050;color:#ff0000;border-radius: 10px;">{{message}}</p>
+{% endif %}
+
 <form action="#" method="POST">
     <div class="d-flex m-1">
         <input class="ml-1 mr-1" name="login" type="text" placeholder="Login">

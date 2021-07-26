@@ -2,9 +2,12 @@
 
 namespace Controller;
 
+use App\Debug;
 use Exception;
 use Bdd\SQLiteCreateTable;
+use Bdd\SQLiteSet;
 use Bdd\SQLiteConnection;
+use Controller\Security;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -14,6 +17,7 @@ class Controller
 {
 
     public $twig;
+    public $conn;
 
     function __construct()
     {
@@ -23,7 +27,9 @@ class Controller
             // initialiser l'environement Twig
             $this->twig = new Environment($loader);
 
-            $sqlite = new SQLiteCreateTable((new SQLiteConnection())->connect());
+            $this->conn = (new SQLiteConnection())->connect();
+
+            $sqlite = new SQLiteCreateTable($this->conn);
 
             // create new tables
             $sqlite->createTables();
@@ -80,19 +86,33 @@ class Controller
     function register ()
     {
         try {
-
-            if (!empty($_POST)) {
-                var_dump($_POST);
-            }
-
             // load template
             $template = $this->twig->load('pages/logon.html.twig');
-
-            // set template variables
-            // render template
-            echo $template->render(array('current'=>'logon'
-            ));
-        
+            $post = $_POST;
+            if (!empty($post)) {
+                    $cleanarray = (new Security)->cleanInput($post);
+                    if ($cleanarray[2] === $cleanarray[3]) {
+                        }else{
+                            echo $template->render(array('current'=>'logon','error'=>'vous n\'avez pas mis les deux meme mot de passe'
+                        ));
+                    }
+                    $sqlite = new SQLiteSet($this->conn);
+                    $res = $sqlite->setUser($cleanarray[0],$cleanarray[2],$cleanarray[1]);
+                    if(is_numeric($res)){
+                        //TODO mettre un message de reussite
+                        header("Location: /");
+                        exit();
+                    }else{
+                        //TODO mettre un message d'erreur'
+                        header("Location: /");
+                        exit();
+                    }
+            }else{
+                    // set template variables
+                    // render template
+                    echo $template->render(array('current'=>'logon'
+                ));
+            }
         } catch (Exception $e) {
             die ('ERROR: ' . $e->getMessage());
         }
@@ -101,11 +121,11 @@ class Controller
     function login ()
     {
         try {
-
-            if (!empty($_POST)) {
-                var_dump($_POST);
+            $post = $_POST;
+            if (!empty($post)) {
+                $cleanarray = (new Security)->cleanInput($post);
             }
-            
+
             // load template
             $template = $this->twig->load('pages/login.html.twig');
 
