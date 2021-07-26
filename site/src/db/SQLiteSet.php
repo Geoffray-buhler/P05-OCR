@@ -21,28 +21,32 @@ class SQLiteSet {
     /**
      * set an article in BDD
      */
-    public function setArticles() {
+    public function setArticles($title,$body,$users_id) {
+        $sql = 'INSERT INTO articles(title,body,users_id) VALUES(:title,:body,:users_id)';
+        $stmt = $this->pdo->prepare($sql);
+        (new Debug)->vardump($this->pdo->errorInfo());
+        $stmt->execute([
+            ':title'=> $title,
+            ':body'=> $body,
+            ':users_id'=>$users_id,
+        ]);
 
+        return $this->pdo->lastInsertId();
     }
 
     /**
      * set an user in BDD
      */
     public function setUser($login,$mdp,$email) {
-        $sql = 'INSERT INTO users(login,password,email) VALUES(:login,:mdp,:email)';
+        $sql = 'INSERT INTO users(type,login,email,password) VALUES("User",:login,:email,:mdp)';
         $stmt = $this->pdo->prepare($sql);
         //meilleur fonction du monde ^^
-        
+        (new Debug)->vardump($this->pdo->errorInfo());
         $stmt->execute([
             ':login'=> $login,
             ':mdp'=> $mdp,
             ':email'=>$email,
         ]);
-        (new Debug)->vardump($this->pdo->errorInfo());
-        (new Debug)->vardump($login);
-        (new Debug)->vardump($mdp);
-        (new Debug)->vardump($email);
-        (new Debug)->vardump($this->pdo->lastInsertId());
 
         return $this->pdo->lastInsertId();
     }

@@ -98,12 +98,12 @@ class Controller
                     }
                     $sqlite = new SQLiteSet($this->conn);
                     $res = $sqlite->setUser($cleanarray[0],$cleanarray[2],$cleanarray[1]);
-                    if(is_numeric($res)){
+                    if($res > 0){
                         //TODO mettre un message de reussite
-                        header("Location: /");
+                        header("Location: /login");
                         exit();
                     }else{
-                        //TODO mettre un message d'erreur'
+                        //TODO mettre un message d'erreur
                         header("Location: /");
                         exit();
                     }

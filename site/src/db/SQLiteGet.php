@@ -4,16 +4,25 @@ namespace Bdd;
 
 class SQLiteGet {
     /**
-     * get the table list in the database
+     * get the articles list in the database
      */
     public function getAllArticles() {
+        $sql = "SELECT * FROM articles";
+        $stmt = $this->pdo->prepare($sql);
+        $result = $stmt->execute();
+        return $result;
+    }
 
-        $stmt = $this->pdo->query("SELECT *
-                                   FROM articles");
-        $articles = [];
-        while ($row = $stmt->fetch(\PDO::FETCH_ASSOC)) {
-            $articles[] = $row;
-        }
-        return $articles;
+    /**
+     * get the user in the database
+     */
+    public function getUser($login,$password) {
+        $sql = "SELECT * FROM users WHERE login=:name,password=:password";
+        $stmt = $this->pdo->prepare($sql);
+        $result = $stmt->execute([
+            ':login'=> $login,
+            ':password'=> $password,
+        ]);
+        return $result;
     }
 }
