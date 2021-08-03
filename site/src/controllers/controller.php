@@ -3,12 +3,15 @@
 namespace Controller;
 
 use App\Debug;
+
 use Exception;
-use Bdd\SQLiteCreateTable;
+use Bdd\SQLiteGet;
 use Bdd\SQLiteSet;
-use Bdd\SQLiteConnection;
-use Controller\Security;
 use Twig\Environment;
+use Controller\Security;
+use Bdd\SQLiteConnection;
+use Bdd\SQLiteCreateTable;
+use Controller\SessionManager;
 use Twig\Loader\FilesystemLoader;
 
 require dirname(__DIR__).'\..\vendor\autoload.php';
@@ -85,34 +88,42 @@ class Controller
 
     function register ()
     {
+        $session = new SessionManager;
         try {
             // load template
             $template = $this->twig->load('pages/logon.html.twig');
             $post = $_POST;
             if (!empty($post)) {
                     $cleanarray = (new Security)->cleanInput($post);
-                    if ($cleanarray[2] === $cleanarray[3]) {
+                    $password= $cleanarray[2];
+                    $confPassword = $cleanarray[3];
+                    if ($password === $confPassword) {
+                        $login = $cleanarray[0];
+                        $email = $cleanarray[1];
+                        $cryptedPassword = password_hash($password,PASSWORD_DEFAULT);
+                        $sqlite = new SQLiteSet($this->conn);
+                        $res = $sqlite->setUser($login,$cryptedPassword,$email);
+                        if($res > 0){
+                            //TODO mettre un message de reussite
+                            $session->setSession('message','Votre compte a bien etais créé');
+                            header("Location: /login");
+                            exit();
                         }else{
-                            echo $template->render(array('current'=>'logon','error'=>'vous n\'avez pas mis les deux meme mot de passe'
-                        ));
-                    }
-                    $sqlite = new SQLiteSet($this->conn);
-                    $res = $sqlite->setUser($cleanarray[0],$cleanarray[2],$cleanarray[1]);
-                    if($res > 0){
-                        //TODO mettre un message de reussite
-                        header("Location: /login");
-                        exit();
+                            //TODO mettre un message d'erreur
+                            $session->setSession('error','Votre compte a pas etais créé');
+                            header("Location: /");
+                            exit();
+                        }
                     }else{
-                        //TODO mettre un message d'erreur
-                        header("Location: /");
-                        exit();
-                    }
-            }else{
-                    // set template variables
-                    // render template
-                    echo $template->render(array('current'=>'logon'
-                ));
-            }
+                        echo $template->render(array('current'=>'logon','error'=>'vous n\'avez pas mis les deux meme mot de passe'
+                    ));}
+                }else{
+                        // set template variables
+                        // render template
+                        echo $template->render(array('current'=>'logon'
+                    ));
+                };
+                   
         } catch (Exception $e) {
             die ('ERROR: ' . $e->getMessage());
         }
@@ -121,19 +132,21 @@ class Controller
     function login ()
     {
         try {
-            $post = $_POST;
-            if (!empty($post)) {
-                $cleanarray = (new Security)->cleanInput($post);
-            }
-
             // load template
             $template = $this->twig->load('pages/login.html.twig');
+            $post = $_POST;
+            (new Debug)->vardump($post);
+            if (!empty($post)) {
+                $cleanarray = (new Security)->cleanInput($post);
+                (new Debug)->vardump($cleanarray);
+                $sqlite = new SQLiteGet($this->conn);
+                $res = $sqlite->getUser($cleanarray[0],$cleanarray[2],$cleanarray[1]);
+            }
 
             // set template variables
             // render template
             echo $template->render(array('current'=>'login'
             ));
-        
         } catch (Exception $e) {
             die ('ERROR: ' . $e->getMessage());
         }

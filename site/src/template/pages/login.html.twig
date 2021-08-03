@@ -8,17 +8,12 @@
 
 {% block content %}
 <h1>Connexion</h1>
-{% if succes %}
-    <p style="padding:1rem; background-color:#00ff0050;color:#00ff00;border-radius: 10px;">{{message}}</p>
-{% endif %}
-{% if error %}
-    <p style="padding:1rem; background-color:#ff000050;color:#ff0000;border-radius: 10px;">{{message}}</p>
-{% endif %}
-<form action="#" method="post">
+
+<form action="#" method="POST">
     <div class="d-flex m-1">
         <input type="text" class="ml-1" placeholder="Login">
-        <input type="text" class="ml-1" placeholder="Mot de passe">
+        <input type="password" class="ml-1" placeholder="Mot de passe">
     </div>
-    <input type="submit">
+    <input type="submit" value="Connexion">
 </form>
 {% endblock %}
