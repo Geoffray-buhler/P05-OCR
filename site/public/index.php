@@ -30,6 +30,9 @@ function index(){
         case '/admin':
             (new Controller)->admin();
         break;
+        case '/profil/modify':
+            (new Controller)->modify();
+        break;
         case '/profil':
             (new Controller)->profil();
         break;

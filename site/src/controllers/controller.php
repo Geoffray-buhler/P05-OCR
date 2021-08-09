@@ -200,6 +200,7 @@ class Controller
             die ('ERROR: ' . $e->getMessage());
         }
     }
+
     function profil()
     {
         $session = new SessionManager;
@@ -209,10 +210,6 @@ class Controller
             $sqlite->DeleteUser($infos_user['id']);
             header("Location: /");
         }
-        elseif (isset($_POST["modify"]))
-        {
-            var_dump('modify');
-        }
         
         try {   
             // load template
@@ -221,6 +218,43 @@ class Controller
             // set template variables
             // render template
             echo $template->render(array('current'=>'profil','session'=>$infos_user
+            ));
+        
+        } catch (Exception $e) {
+            die ('ERROR: ' . $e->getMessage());
+        }
+    }
+
+    function modify()
+    {
+        $session = new SessionManager;
+        $infos_user = $session->getSession();
+        $sqlite = new SQLiteGet($this->conn);
+        $user_info_bdd = $sqlite->getUser($infos_user['login']);
+
+        if(isset($_POST["changepassword"])){
+           $verif = password_verify($_POST['old_password'],$user_info_bdd['password']);
+           if($verif === true){
+            $password= $_POST["password"];
+            $confPassword = $_POST["password_rec"];
+            if ($password === $confPassword) {
+                if ($infos_user['id'] === $user_info_bdd['id']) {
+                    $password = password_hash($password,PASSWORD_DEFAULT);
+                    $sqlite = new SQLiteSet($this->conn);
+                    $user_info_bdd = $sqlite->updateUser($infos_user['id'],$password);
+                    header("Location: /profil");
+                }
+            }
+           }
+        }
+        
+        try {   
+            // load template
+            $template = $this->twig->load('pages/modify.html.twig');
+        
+            // set template variables
+            // render template
+            echo $template->render(array('current'=>'modify','session'=>$infos_user
             ));
         
         } catch (Exception $e) {

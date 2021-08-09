@@ -38,11 +38,23 @@ class SQLiteSet {
     public function setUser($login,$mdp,$email) {
         $sql = 'INSERT INTO users(type,login,email,password) VALUES("User",:login,:email,:mdp)';
         $stmt = $this->pdo->prepare($sql);
-        //meilleur fonction du monde ^^
         $stmt->execute([
             ':login'=> $login,
             ':mdp'=> $mdp,
             ':email'=>$email,
+        ]);
+        return $this->pdo->lastInsertId();
+    }
+
+    /**
+    * update an user in BDD
+    */
+    public function updateUser($id,$mdp) {
+        $sql = 'UPDATE users SET password=:mdp WHERE id=:id' ;
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':id'=> $id,
+            ':mdp'=> $mdp,
         ]);
         return $this->pdo->lastInsertId();
     }
@@ -54,4 +66,5 @@ class SQLiteSet {
     public function setComment() {
 
     }
+
 }

@@ -159,8 +159,16 @@ nav a:hover{
     margin-left: 1rem;
 }
 
+.ml-2{
+    margin-left: 2rem;
+}
+
 .mr-1{
     margin-right: 1rem;
+}
+
+.w84{
+    width: 84%;
 }
 
 @keyframes float {
