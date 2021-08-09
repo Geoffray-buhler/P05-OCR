@@ -119,6 +119,38 @@ nav a:hover{
     transition: 1s;
 }
 
+.btn-error{
+    background-color: #ff000050;
+    border: solid 1px #ff0000;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.btn-error:hover{
+    background-color: #ff0000;
+    border: solid 1px #ff000050;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.btn-blue{
+    background-color: #4455ff50;
+    border: solid 1px #4455ff;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.btn-blue:hover{
+    background-color: #4455ff;
+    border: solid 1px #4455ff50;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
 .m-1{
     margin: 1rem;
 }

@@ -11,6 +11,7 @@ use Twig\Environment;
 use Controller\Security;
 use Bdd\SQLiteConnection;
 use Bdd\SQLiteCreateTable;
+use Bdd\SQLiteDelete;
 use Controller\SessionManager;
 use Twig\Loader\FilesystemLoader;
 
@@ -21,6 +22,7 @@ class Controller
 
     public $twig;
     public $conn;
+    public $post;
 
     function __construct()
     {
@@ -36,17 +38,23 @@ class Controller
 
             // create new tables
             $sqlite->createTables();
+
+            if(!empty($_POST)){
+                $this->post = $_POST;
+            }
     }
 
     function home ()
     {
+        $session = new SessionManager;
+
         try {
             // load template
             $template = $this->twig->load('pages/index.html.twig');
         
             // set template variables
             // render template
-            echo $template->render(array('current'=>'home'
+            echo $template->render(array('current'=>'home','session'=>$session->getSession()
             ));
         
         } catch (Exception $e) {
@@ -56,13 +64,14 @@ class Controller
 
     function contact ()
     {
+        $session = new SessionManager;
         try {
             // load template
             $template = $this->twig->load('pages/contact.html.twig');
         
             // set template variables
             // render template
-            echo $template->render(array('current'=>'contact'
+            echo $template->render(array('current'=>'contact','session'=>$session->getSession()
             ));
         
         } catch (Exception $e) {
@@ -72,13 +81,14 @@ class Controller
 
     function pages404 ()
     {
+        $session = new SessionManager;
         try {
             // load template
             $template = $this->twig->load('pages/404.html.twig');
         
             // set template variables
             // render template
-            echo $template->render(array(
+            echo $template->render(array('session'=>$session->getSession()
             ));
         
         } catch (Exception $e) {
@@ -92,9 +102,8 @@ class Controller
         try {
             // load template
             $template = $this->twig->load('pages/logon.html.twig');
-            $post = $_POST;
-            if (!empty($post)) {
-                    $cleanarray = (new Security)->cleanInput($post);
+            if (!empty($this->post)) {
+                    $cleanarray = (new Security)->cleanInput($this->post);
                     $password= $cleanarray[2];
                     $confPassword = $cleanarray[3];
                     if ($password === $confPassword) {
@@ -105,12 +114,12 @@ class Controller
                         $res = $sqlite->setUser($login,$cryptedPassword,$email);
                         if($res > 0){
                             //TODO mettre un message de reussite
-                            $session->setSession('message','Votre compte a bien etais créé');
+                            $session->setSession('message','succes','Votre compte a bien etais créé');
                             header("Location: /login");
                             exit();
                         }else{
                             //TODO mettre un message d'erreur
-                            $session->setSession('error','Votre compte a pas etais créé');
+                            $session->setSession('message','error','Votre compte a pas etais créé');
                             header("Location: /");
                             exit();
                         }
@@ -120,7 +129,7 @@ class Controller
                 }else{
                         // set template variables
                         // render template
-                        echo $template->render(array('current'=>'logon'
+                        echo $template->render(array('current'=>'logon','session'=>$session->getSession()
                     ));
                 };
                    
@@ -131,36 +140,87 @@ class Controller
 
     function login ()
     {
+        $session = new SessionManager;
         try {
             // load template
             $template = $this->twig->load('pages/login.html.twig');
-            $post = $_POST;
-            (new Debug)->vardump($post);
-            if (!empty($post)) {
-                $cleanarray = (new Security)->cleanInput($post);
-                (new Debug)->vardump($cleanarray);
+            if (!empty($this->post)) {
+                $login = $this->post['login'];
+                $password = $this->post['password'];
+
                 $sqlite = new SQLiteGet($this->conn);
-                $res = $sqlite->getUser($cleanarray[0],$cleanarray[2],$cleanarray[1]);
+                $res = $sqlite->getUser($login);
+
+                $verif = password_verify($password,$res['password']);
+                if ($verif == true) {
+                    $role = $res['type'];
+                    $name = $res['login'];
+                    $id = $res['id'];
+                    $session->setSession('roles', $role);
+                    $session->setSession('login', $name);
+                    $session->setSession('id', $id);
+                    header("Location: /");
+                }
             }
 
             // set template variables
             // render template
-            echo $template->render(array('current'=>'login'
+            echo $template->render(array('current'=>'login','session'=>$session->getSession()
             ));
         } catch (Exception $e) {
             die ('ERROR: ' . $e->getMessage());
         }
     }
 
+    function deconnexion()
+    {
+        $session = new SessionManager;
+        header("Location: /");
+
+        try{
+            $session->closeSession();
+        }catch (Exception $e){
+            die ('ERROR: ' . $e->getMessage());
+        }
+    }
+
     function admin()
     {
+        $session = new SessionManager;
         try {   
             // load template
             $template = $this->twig->load('pages/admin.html.twig');
         
             // set template variables
             // render template
-            echo $template->render(array('current'=>'admin'
+            echo $template->render(array('current'=>'admin','session'=>$session->getSession()
+            ));
+        
+        } catch (Exception $e) {
+            die ('ERROR: ' . $e->getMessage());
+        }
+    }
+    function profil()
+    {
+        $session = new SessionManager;
+        $infos_user = $session->getSession();
+        if(isset($_POST["delete"])){
+            $sqlite = new SQLiteDelete($this->conn);
+            $sqlite->DeleteUser($infos_user['id']);
+            header("Location: /");
+        }
+        elseif (isset($_POST["modify"]))
+        {
+            var_dump('modify');
+        }
+        
+        try {   
+            // load template
+            $template = $this->twig->load('pages/profil.html.twig');
+        
+            // set template variables
+            // render template
+            echo $template->render(array('current'=>'profil','session'=>$infos_user
             ));
         
         } catch (Exception $e) {

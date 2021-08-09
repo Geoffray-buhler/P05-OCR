@@ -2,7 +2,22 @@
 
 namespace Bdd;
 
+use App\Debug;
+
 class SQLiteGet {
+        /**
+    * PDO object
+    * @var \PDO
+    */
+    private $pdo;
+
+    /**
+    * connect to the SQLite database
+    */
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
+    
     /**
      * get the articles list in the database
      */
@@ -16,13 +31,13 @@ class SQLiteGet {
     /**
      * get the user in the database
      */
-    public function getUser($login,$password) {
-        $sql = "SELECT * FROM users WHERE login=:name,password=:password";
+    public function getUser($login) {
+        $sql = "SELECT * FROM users WHERE login=:login";
         $stmt = $this->pdo->prepare($sql);
-        $result = $stmt->execute([
-            ':login'=> $login,
-            ':password'=> $password,
+        $stmt->execute([
+            ":login"=> $login
         ]);
-        return $result;
+        $result = $stmt->fetchAll();
+        return $result[0];
     }
 }

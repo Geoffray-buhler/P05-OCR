@@ -2,26 +2,38 @@
 
 namespace Controller;
 
+use App\Debug;
+
 class SessionManager 
 {
 
-    public $session;
+    public $session = [];
+    public $user_info;
 
     //TODO Set cookie et Sessionmanager
     function __construct()
     {
         session_start();
+        $this->initvalue();
+        $this->id = session_create_id();
+    }
 
-        // for ($i=0; $i < count($_SESSION['data']); $i++) { 
-        //     array_push($this->session,$_SESSION['data'][$i]);
-        // }
+    private function initvalue(){
+        $this->id = "";
+        $this->user_info =[];
+        $this->messages = '';
     }
 
     function setSession($name,$entree){
-        array_push($this->session,[$name => $entree]);
+        $_SESSION[$name] = $entree;
     }
 
     function getSession(){
+        $this->session = $_SESSION;
         return $this->session;
+    }
+
+    function closeSession(){
+        session_destroy();
     }
 }

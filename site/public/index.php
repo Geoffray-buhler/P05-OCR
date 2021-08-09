@@ -30,6 +30,12 @@ function index(){
         case '/admin':
             (new Controller)->admin();
         break;
+        case '/profil':
+            (new Controller)->profil();
+        break;
+        case '/deconnexion':
+            (new Controller)->deconnexion();
+        break;
         default:
             (new Controller)->pages404();
     }

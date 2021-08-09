@@ -28,7 +28,8 @@ class SQLiteCreateTable {
                 type VARCHAR (50) NOT NULL,
                 login VARCHAR (50) NOT NULL,
                 email VARCHAR (50) NOT NULL,
-                password VARCHAR (50) NOT NULL
+                password VARCHAR (50) NOT NULL,
+                CONSTRAINT users UNIQUE (id,login)
             )','CREATE TABLE IF NOT EXISTS articles (
                 id INTEGER PRIMARY KEY,
                 title  VARCHAR (50) NOT NULL,

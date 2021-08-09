@@ -24,7 +24,6 @@ class SQLiteSet {
     public function setArticles($title,$body,$users_id) {
         $sql = 'INSERT INTO articles(title,body,users_id) VALUES(:title,:body,:users_id)';
         $stmt = $this->pdo->prepare($sql);
-        (new Debug)->vardump($this->pdo->errorInfo());
         $stmt->execute([
             ':title'=> $title,
             ':body'=> $body,
@@ -40,7 +39,6 @@ class SQLiteSet {
         $sql = 'INSERT INTO users(type,login,email,password) VALUES("User",:login,:email,:mdp)';
         $stmt = $this->pdo->prepare($sql);
         //meilleur fonction du monde ^^
-        (new Debug)->vardump($this->pdo->errorInfo());
         $stmt->execute([
             ':login'=> $login,
             ':mdp'=> $mdp,

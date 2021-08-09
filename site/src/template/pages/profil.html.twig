@@ -1,0 +1,16 @@
+{% extends "/Base.html.twig" %}
+
+{% block title %}Votre profil{% endblock %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<h1>Profil</h1>
+<p>Nom du compte : {{session.login}}</p>
+<div class="d-flex">
+    <form action="#" method="post"><button class="mr-1 btn-error" type="submit" name="delete">Supprimer son compte</button></form>
+    <form action="#" method="post"><button class="btn-blue" type="submit" name="modify">Modifier son compte</button></form>
+</div>
+{% endblock %}
