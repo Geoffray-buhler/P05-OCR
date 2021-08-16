@@ -1,0 +1,40 @@
+{% extends "/Base.html.twig" %}
+
+{% block title %}Administration{% endblock %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<h1>Administration</h1>
+<h2>Gestion des posts</h2>
+<a href="/post/create" class="btn-blue">Crée un nouvel article</a>
+<table>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td><a href="">{{post.title}}</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h2>Gestion des utilisateurs</h2>
+<table>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td class="d-flex center">
+                <p class="mr-1">{{user.login}}</p>
+                <p class="mr-1">{{user.email}}</p>
+                <form class="button mr-1" action="#" method="POST">
+                <input type="hidden" value="{{user.login}}" name="login"></input>
+                <input type="hidden" value="{{user.email}}" name="email"></input>   
+                <button class="btn-error" type="submit" name="delete">supprimé(e) le compte de {{user.login}}</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -43,7 +43,7 @@ a{text-decoration: none;color: rgb(0, 0, 0);}
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height:80vh;
+    height:68vh;
     color: #ffffff80;
     width: 75%;
     background: rgba( 162, 162, 162, 0.15 );
@@ -59,9 +59,37 @@ a{text-decoration: none;color: rgb(0, 0, 0);}
     width: 210px;
 }
 
+.jumbotron div{
+    top: 10px;
+    right: 20px;
+    position: absolute; 
+}
+
+.jumbotron a{
+    color: #ffffff80;
+}
+
+.jumbotron a:hover{
+    color: #ffffff;
+}
+
 .content{
     padding: 1rem;
     background-color: #ffffff;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.begin{
+    text-align: left;
+}
+
+.white{
+    color:#ffffff!important;
 }
 
 nav {
@@ -78,6 +106,14 @@ nav {
     color: #0e2336;
 }
 
+.d-flex{
+    display: flex;
+}
+
+.column{
+    flex-direction: column;
+}
+
 nav a {
     transition: 1s;
 }
@@ -86,6 +122,91 @@ nav a:hover{
     color: rgb(0, 0, 0);
     background-color:#ffffff80;
     transition: 1s;
+}
+
+.btn-error{
+    background-color: #ff000050;
+    border: solid 1px #ff0000;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.btn-error:hover{
+    background-color: #ff0000;
+    border: solid 1px #ff000050;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.btn-blue{
+    background-color: #4455ff50;
+    border: solid 1px #4455ff;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.btn-blue:hover{
+    background-color: #4455ff;
+    border: solid 1px #4455ff50;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.button{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.m-1{
+    margin: 1rem;
+}
+
+.ml-1{
+    margin-left: 1rem;
+}
+
+.ml-2{
+    margin-left: 2rem;
+}
+
+.mr-1{
+    margin-right: 1rem;
+}
+
+.mt-1{
+    margin-top: 1rem;
+}
+
+.articleMain{
+    padding: 1rem;
+    background-color: #2a2f6680;
+    border: solid #0e2336 1px;
+    width: 80%;
+}
+
+.link{
+    color: #ecc02f;
+    transition: 1s;
+}
+
+.link:hover{
+    color: #2f7bec;
+    transition: 1s;
+}
+
+.w84{
+    width: 84%;
+}
+
+.textarea{
+    width: 300px;
+    height: 150px;
 }
 
 @keyframes float {
