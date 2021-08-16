@@ -2,6 +2,8 @@
 
 namespace Controller;
 
+use App\Debug;
+
 class Security 
 {
     //clean the user's input
@@ -10,7 +12,7 @@ class Security
         $filtered = [];
         if (!empty($enter)) {
             foreach ($enter as $key => $value) {
-                array_push($filtered,filter_var($value, FILTER_SANITIZE_STRING));
+                array_push($filtered, htmlspecialchars($value));
             }
         }
         return $filtered;

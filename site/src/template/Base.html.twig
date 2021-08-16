@@ -11,6 +11,7 @@
         {% block css %}{% endblock %}
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <link rel="stylesheet" href="/css/normalize.css" />
 		<link rel="stylesheet" href="/css/style.css" />
 	</head>
 	<body class="is-preload">
@@ -38,7 +39,7 @@
             <nav>
                 <div>
                     <a class="menuadd {% if current == 'home' %}active{% endif %}" href="/">Accueil</a>
-                    <a class="menuadd {% if current == 'contact' %}active{% endif %}" href="/contact">Contact</a>
+                    <a class="menuadd {% if current == 'articles' %}active{% endif %}" href="/articles">Articles</a>
                 </div>
                 <div>
                     <a class="icon" target="_blank" href="https://www.twitch.tv/griffont39"><i class="fab fa-twitch"></i></a>

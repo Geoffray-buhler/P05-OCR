@@ -13,7 +13,9 @@ class SessionManager
     //TODO Set cookie et Sessionmanager
     function __construct()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            $this->startSession();
+        }
         $this->initvalue();
         $this->id = session_create_id();
     }
@@ -35,5 +37,9 @@ class SessionManager
 
     function closeSession(){
         session_destroy();
+    }
+
+    function startSession(){
+        session_start();
     }
 }

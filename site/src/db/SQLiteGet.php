@@ -2,6 +2,7 @@
 
 namespace Bdd;
 
+use PDO;
 use App\Debug;
 
 class SQLiteGet {
@@ -22,9 +23,25 @@ class SQLiteGet {
      * get the articles list in the database
      */
     public function getAllArticles() {
-        $sql = "SELECT * FROM articles";
+        $sql = "SELECT id,title,body FROM articles";
         $stmt = $this->pdo->prepare($sql);
         $result = $stmt->execute();
+        if ($result) { 
+            $result = $stmt->fetchAll();
+        }
+        return $result;
+    }
+
+    /**
+     * get the articles list in the database
+     */
+    public function getAllUsers() {
+        $sql = "SELECT id,login,type,email FROM users";
+        $stmt = $this->pdo->prepare($sql);
+        $result = $stmt->execute();
+        if ($result) { 
+            $result = $stmt->fetchAll();
+        }
         return $result;
     }
 
@@ -34,10 +51,12 @@ class SQLiteGet {
     public function getUser($login) {
         $sql = "SELECT * FROM users WHERE login=:login";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute([
+        $result = $stmt->execute([
             ":login"=> $login
         ]);
-        $result = $stmt->fetchAll();
-        return $result[0];
+        if ($result) { 
+            $result = $stmt->fetchAll();
+        }
+        return $result;
     }
 }
