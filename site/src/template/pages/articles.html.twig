@@ -7,8 +7,10 @@
     <h1>Les derniers articles</h1>
     {% for article in articles %}
     <div class="articleMain">
-        <h2 class="center">{{article.title}}</h2>
-        <h4 class="begin">{{article.body}}</h4>
+        <a href={{article.id}}>
+            <h2 class="center">{{article.title}}</h2>
+            <h4 class="begin">{{article.body|length > 150 ? article.body|slice(0, 150) ~ '...' : article.body  }}</h4>
+        </a>
     </div>
     {% endfor %}
 {% endblock %}

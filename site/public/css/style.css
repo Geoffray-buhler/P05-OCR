@@ -191,13 +191,13 @@ nav a:hover{
 }
 
 .link{
-    color: #ecc02f;
-    transition: 1s;
+    color: #42afaf;
+    transition: 0.3s;
 }
 
 .link:hover{
-    color: #2f7bec;
-    transition: 1s;
+    color: #0c48a3;
+    transition: 0.3s;
 }
 
 .w84{
