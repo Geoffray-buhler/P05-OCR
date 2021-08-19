@@ -23,6 +23,7 @@ require dirname(__DIR__).'\..\vendor\autoload.php';
 
 class Controller
 {
+    // TODO DockerFile
 
     public $twig;
     public $conn;
@@ -41,7 +42,7 @@ class Controller
         $this->mail->SMTPAuth   = false;                                  //Enable SMTP authentication
         $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $this->mail->CharSet    = "utf-8";
-        $this->mail->Port       = 465;
+        $this->mail->Port       = 1025;
 
         // le dossier ou on trouve les templates
         $loader = new FilesystemLoader('../src/template');
@@ -78,7 +79,6 @@ class Controller
                 $this->post["subject"] = $this->post[1];  
                 $this->post["email"] = $this->post[2]; 
                 $this->post["body"] = $this->post[3];
-                (new Debug)->vardump($this->post);
                 if (filter_var($this->post['email'], FILTER_VALIDATE_EMAIL)) {
                         //Recipients
                         $this->mail->setFrom($this->post['email'], 'Mailer');
@@ -113,7 +113,6 @@ class Controller
             //getAllArticle
             $sqlite = new SQLiteGet($this->conn);
             $articles = $sqlite->getAllArticles();
-
             // set template variables
             // render template
             echo $template->render(['current'=>'articles' , 'session'=>$this->session->getSession() , 'articles'=>$articles
@@ -122,6 +121,11 @@ class Controller
         } catch (Exception $e) {
             die ('ERROR: ' . $e->getMessage());
         }
+    }
+
+    function article($id)
+    {
+
     }
 
     function pages404 ()
@@ -187,14 +191,12 @@ class Controller
             // load template
             $template = $this->twig->load('pages/login.html.twig');
             if (!empty($this->post)) {
+                $this->post['login'] = $this->post[0];
+                $this->post['password'] = $this->post[1];
                 $login = $this->post['login'];
                 $password = $this->post['password'];
-                (new Debug)->vardump($login);
-                (new Debug)->vardump($password);
-
                 $sqlite = new SQLiteGet($this->conn);
-                $res = array_shift($sqlite->getUser($login));
-                (new Debug)->vardump($res['password']);
+                $res = $sqlite->getUser($login)[0];
                 $verif = password_verify($password,$res['password']);
                 if ($verif == true) {
                     $role = $res['type'];
@@ -233,7 +235,6 @@ class Controller
         $sqget = new SQLiteGet($this->conn);
         $posts = $sqget->getAllArticles();
         $users = $sqget->getAllUsers();
-        (new Debug)->vardump($users);
         if(!empty($this->post)){
 
         }
@@ -245,6 +246,44 @@ class Controller
             // render template
             echo $template->render(['current'=>'admin','session'=>$this->session->getSession(),'posts'=>$posts,'users'=>$users
             ]);
+        
+        } catch (Exception $e) {
+            die ('ERROR: ' . $e->getMessage());
+        }
+    }
+
+    function PasswordLost()
+    {
+        try {
+            if(!empty($this->post)){
+                (new Debug)->vardump($this->post);
+            }
+            // load template
+            $template = $this->twig->load('pages/lost.html.twig');
+        
+            // set template variables
+            // render template
+            echo $template->render(array('current'=>'mdplost'
+            ));
+        
+        } catch (Exception $e) {
+            die ('ERROR: ' . $e->getMessage());
+        }
+    }
+
+    function LoginLost()
+    {
+        try {
+            if(!empty($this->post)){
+                (new Debug)->vardump($this->post);
+            }
+            // load template
+            $template = $this->twig->load('pages/lostgin.html.twig');
+        
+            // set template variables
+            // render template
+            echo $template->render(array('current'=>'mdplost'
+            ));
         
         } catch (Exception $e) {
             die ('ERROR: ' . $e->getMessage());
@@ -315,6 +354,8 @@ class Controller
     {
         $infos_user = $this->session->getSession();
         if (isset($this->post)) {
+            $this->post['title'] = $this->post[0];
+            $this->post['body'] = $this->post[1];
             $articleTitle = $this->post['title'];
             $articleBody = $this->post['body'];
             $userId = $this->session->session['id']; 
