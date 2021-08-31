@@ -6,6 +6,9 @@
 {% block content %}
     <h1>{{article[0].title}}</h1>
     <div class="articleMain">
+    {% if article[0].fileName is defined %}
+        <img src="/uploads/{{article[0].fileName}}" alt="image du post {{article[0].title}}"/>
+    {% endif %}
     <p class="begin">{{ article[0].body }}</p>
     </div>
     {% if comments is not empty %}
@@ -15,7 +18,7 @@
             <h4>{{comment.title}}</h4>
             <p>{{comment.body}}</p>
             {% if session.roles == 'admin' %}
-                <form action="/delete/comment" class="flexend" method="POST">
+                <form action="/delete/comment/{{comment.id}}" class="flexend" method="POST">
                     <input type="hidden" name="supprimer" value="comment">
                     <input class="errorbtn" type="submit" name="submit" value="X">
                 </form>

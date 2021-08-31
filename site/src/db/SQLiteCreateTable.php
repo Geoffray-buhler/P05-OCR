@@ -34,6 +34,7 @@ class SQLiteCreateTable {
                 id INTEGER PRIMARY KEY,
                 title  VARCHAR (50) NOT NULL,
                 body  TEXT NOT NULL,
+                fileName VARCHAR (50),
                 users_id INTEGER,
                 FOREIGN KEY (users_id)
                 REFERENCES users(id) ON UPDATE CASCADE

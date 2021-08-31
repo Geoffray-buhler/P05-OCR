@@ -21,13 +21,14 @@ class SQLiteSet {
     /**
     * set an article in BDD
     */
-    public function setArticles($title,$body,$users_id) {
-        $sql = 'INSERT INTO articles(title,body,users_id) VALUES(:title,:body,:users_id)';
+    public function setArticles($title,$body,$users_id,$name) {
+        $sql = 'INSERT INTO articles(title,body,fileName,users_id) VALUES(:title,:body,:fileName,:users_id)';
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             ':title'=> $title,
             ':body'=> $body,
             ':users_id'=>$users_id,
+            ':fileName'=>$name
         ]);
         return $this->pdo->lastInsertId();
     }

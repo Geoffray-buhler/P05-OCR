@@ -5,9 +5,10 @@
 {% endblock %}
 {% block content %}
     <h1>Nouvelle article</h1>
-    <form class="d-flex column" action="#" method="POST">
-        <input type="text" name="title" placholder="Titre"></input>
+    <form class="d-flex column" action="#" method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" placholder="Titre">
         <textarea class="mt-1 textarea" type="textarea" name="body" placholder="Article"></textarea>
-        <input class="mt-1 btnprimary" type="submit" name="submit" value="Poster"></input>
+        <input type="file" name="file" id="file" accept="image/png, image/jpeg">
+        <input class="mt-1 btnprimary" type="submit" name="submit" value="Poster">
     </form>
 {% endblock %}

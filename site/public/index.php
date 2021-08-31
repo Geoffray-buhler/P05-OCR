@@ -22,6 +22,11 @@ function index(){
         }
     }
 
+    if (strpos($url,'delete/comment')) {
+        $id = substr($url,16);
+        return (new Controller)->Deletecomms($id);
+        }
+
     switch (parse_url($url)['path'])
     {
         case '/':

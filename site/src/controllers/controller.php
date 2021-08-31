@@ -19,9 +19,7 @@ use Twig\Loader\FilesystemLoader;
 require dirname(__DIR__).'\..\vendor\autoload.php';
 
 class Controller
-{
-    // TODO DockerFile
-    
+{  
     public $twig;
     public $conn;
     public $post;
@@ -145,17 +143,23 @@ class Controller
     {
         try {
             // load template
-            $is_ok=0;
             $template = $this->twig->load('pages/logon.html.twig');
             if (!empty($this->post)) {
+                    $is_ok=0;
                     $cleanarray = (new Security)->cleanInput($this->post);
                     $allusers = (new SQLiteGet($this->conn))->getAllUsers();
-                    for ($i=0; $i <count($allusers) ; $i++) {
-                        if ($allusers[$i] === $cleanarray[0]) {
-                            $is_ok=0;
-                        }else{
-                            $is_ok=1;
+                    if ($allusers) {
+                        for ($i=0; $i <count($allusers) ; $i++) {
+                            var_dump($allusers[$i],$cleanarray[0]);
+                            die;
+                            if ($allusers[$i] === $cleanarray[0]) {
+                                $is_ok=0;
+                            }else{
+                                $is_ok=1;
+                            }
                         }
+                    }else{
+                        $is_ok=1;
                     }
                 if ($is_ok) {
                     $password= $cleanarray[2];
@@ -367,13 +371,16 @@ class Controller
     {
         $infos_user = $this->session->getSession();
         if (isset($this->post)) {
-            $this->post['title'] = $this->post[0];
-            $this->post['body'] = $this->post[1];
-            $articleTitle = $this->post['title'];
-            $articleBody = $this->post['body'];
-            $userId = $this->session->session['id']; 
+            if(isset($_FILES['file'])){
+                $tmpName = $_FILES['file']['tmp_name'];
+                $name = $this->session->session['login'].$this->session->session['id'].$_FILES['file']['name'];
+                move_uploaded_file($tmpName, './uploads/'.$name);
+            }
+            $articleTitle = $this->post[0];
+            $articleBody = $this->post[1];
+            $userId = $this->session->session['id'];
             $sqlite = new SQLiteSet($this->conn);
-            $sqlite->setArticles($articleTitle,$articleBody,$userId);
+            $sqlite->setArticles($articleTitle,$articleBody,$userId,$name);
             $this->session->setSession('succes','Votre article est bien poster');
             header("Location: /");
         }
@@ -389,5 +396,17 @@ class Controller
         } catch (Exception $e) {
             die ('ERROR: ' . $e->getMessage());
         }
+    }
+
+    function Deletecomms($id){
+        // load template
+        $template = $this->twig->load('pages/articles.html.twig');
+
+        $sqlite = new SQLiteGet($this->conn);
+        $articles = $sqlite->getAllArticles();
+
+        $sqlite = new SQLiteDelete($this->conn);
+        $res = $sqlite->DeleteComment($id);
+        header("Location: /articles");
     }
 }

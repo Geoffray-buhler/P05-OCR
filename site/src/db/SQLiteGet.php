@@ -51,7 +51,7 @@ class SQLiteGet {
      * get the articles list in the database
      */
     public function getArticle($id) {
-        $sql = "SELECT id,title,body FROM articles WHERE id=:id ";
+        $sql = "SELECT id,title,fileName,body FROM articles WHERE id=:id ";
         $stmt = $this->pdo->prepare($sql);
         $result = $stmt->execute([
             ":id"=> $id
