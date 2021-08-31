@@ -14,9 +14,6 @@ use Bdd\SQLiteConnection;
 use Bdd\SQLiteCreateTable;
 use Controller\SessionManager;
 use Twig\Loader\FilesystemLoader;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception as MailException;
 
 
 require dirname(__DIR__).'\..\vendor\autoload.php';
@@ -24,7 +21,7 @@ require dirname(__DIR__).'\..\vendor\autoload.php';
 class Controller
 {
     // TODO DockerFile
-
+    
     public $twig;
     public $conn;
     public $post;
@@ -33,16 +30,7 @@ class Controller
 
     function __construct()
     {
-        //TODO faire fonctionner ca ^^
-        // initialisation du mail de contact 
-        $this->mail = new PHPMailer(true);
-        $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-        $this->mail->isSMTP();                                            //Send using SMTP
-        $this->mail->Host       = 'localhost';                            //Set the SMTP server to send through
-        $this->mail->SMTPAuth   = false;                                  //Enable SMTP authentication
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-        $this->mail->CharSet    = "utf-8";
-        $this->mail->Port       = 1025;
+        $this->session = $_SESSION;
 
         // le dossier ou on trouve les templates
         $loader = new FilesystemLoader('../src/template');
@@ -80,26 +68,12 @@ class Controller
                 $this->post["email"] = $this->post[2]; 
                 $this->post["body"] = $this->post[3];
                 if (filter_var($this->post['email'], FILTER_VALIDATE_EMAIL)) {
-                        //Recipients
-                        $this->mail->setFrom($this->post['email'], 'Mailer');
-                        $this->mail->addAddress('seigneur39@gmail.com', 'Mon blog');     //Add a recipient
-                    
-                        //Content
-                        $this->mail->isHTML(true);                                  //Set email format to HTML
-                        $this->mail->Subject = $this->post["subject"];
-                        $this->mail->Body    = $this->post["body"];
-                        $this->mail->AltBody = $this->post["body"];
-                    
-                        $this->mail->send();
-                        echo 'Le message est bien';
-                }
-            }
-            
-            // set template variables
-            // render template
-            echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession()
-            ]);
-        
+                    new sendMail($this->post["name"],$this->post["email"],'griffont.rf@gmail.com',$this->post["body"],$this->post["subject"]);
+                };
+
+                echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession()
+                ]);
+            };
         } catch (Exception $e) {
             die ('ERROR: ' . $e->getMessage());
         }
@@ -110,7 +84,7 @@ class Controller
         try {
             // load template
             $template = $this->twig->load('pages/articles.html.twig');
-            //getAllArticle
+            // getAllArticle
             $sqlite = new SQLiteGet($this->conn);
             $articles = $sqlite->getAllArticles();
             // set template variables
@@ -125,7 +99,30 @@ class Controller
 
     function article($id)
     {
+        try {
+            // load template
+            $template = $this->twig->load('pages/post.html.twig');
 
+            $sqlite = new SQLiteGet($this->conn);
+            $article = $sqlite->getArticle($id);
+            $comments = $sqlite->getAllCommentFromArticle($id);
+            if (!empty($this->post)) {
+                $cleanarray = (new Security)->cleanInput($this->post);
+                $title = $cleanarray[0];
+                $body = $cleanarray[1];
+                $article_id = $cleanarray[2];
+                $users_id = $cleanarray[3];
+                $sqlite = new SQLiteSet($this->conn);
+                $sqlite->setComment($title,$body,$users_id,$article_id);
+            }
+            // set template variables
+            // render template
+            echo $template->render(array('session'=>$this->session->getSession(),'article' => $article,'comments'=>$comments
+            ));
+        
+        } catch (Exception $e) {
+            die ('ERROR: ' . $e->getMessage());
+        }
     }
 
     function pages404 ()
@@ -196,16 +193,21 @@ class Controller
                 $login = $this->post['login'];
                 $password = $this->post['password'];
                 $sqlite = new SQLiteGet($this->conn);
-                $res = $sqlite->getUser($login)[0];
-                $verif = password_verify($password,$res['password']);
-                if ($verif == true) {
-                    $role = $res['type'];
-                    $name = $res['login'];
-                    $id = $res['id'];
-                    $this->session->setSession('roles', $role);
-                    $this->session->setSession('login', $name);
-                    $this->session->setSession('id', $id);
-                    header("Location: /");
+                $res = $sqlite->getUser($login);
+                $res = $res[0];
+                if (!empty($res)) {
+                    $verif = password_verify($password,$res['password']);
+                    if ($verif == true) {
+                        $role = $res['type'];
+                        $name = $res['login'];
+                        $id = $res['id'];
+                        $this->session->setSession('roles', $role);
+                        $this->session->setSession('login', $name);
+                        $this->session->setSession('id', $id);
+                        header("Location: /");
+                    }
+                }else{
+                    echo "ce compte existe pas !!!";
                 }
             }
 

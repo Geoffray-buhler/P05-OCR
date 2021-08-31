@@ -33,6 +33,21 @@ class SQLiteSet {
     }
 
     /**
+    * set an commentary in BDD
+    */
+    public function setComment($title,$body,$users_id,$article_id) {
+        $sql = 'INSERT INTO comments(title,body,users_id,articles_id) VALUES(:title,:body,:users_id,:articles_id)';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':title'=> $title,
+            ':body'=> $body,
+            ':users_id'=>$users_id,
+            ':articles_id'=>$article_id
+        ]);
+        return $this->pdo->lastInsertId();
+    }
+
+    /**
     * set an user in BDD
     */
     public function setUser($login,$mdp,$email) {
@@ -58,13 +73,4 @@ class SQLiteSet {
         ]);
         return $this->pdo->lastInsertId();
     }
-
-    /**
-    * set an comment in BDD
-    * @var comment string
-    */
-    public function setComment() {
-
-    }
-
 }
