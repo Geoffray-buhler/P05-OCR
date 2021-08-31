@@ -70,10 +70,10 @@ class Controller
                 if (filter_var($this->post['email'], FILTER_VALIDATE_EMAIL)) {
                     new sendMail($this->post["name"],$this->post["email"],'griffont.rf@gmail.com',$this->post["body"],$this->post["subject"]);
                 };
-
+            };
                 echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession()
                 ]);
-            };
+            
         } catch (Exception $e) {
             die ('ERROR: ' . $e->getMessage());
         }
@@ -145,9 +145,19 @@ class Controller
     {
         try {
             // load template
+            $is_ok=0;
             $template = $this->twig->load('pages/logon.html.twig');
             if (!empty($this->post)) {
                     $cleanarray = (new Security)->cleanInput($this->post);
+                    $allusers = (new SQLiteGet($this->conn))->getAllUsers();
+                    for ($i=0; $i <count($allusers) ; $i++) {
+                        if ($allusers[$i] === $cleanarray[0]) {
+                            $is_ok=0;
+                        }else{
+                            $is_ok=1;
+                        }
+                    }
+                if ($is_ok) {
                     $password= $cleanarray[2];
                     $confPassword = $cleanarray[3];
                     if ($password === $confPassword) {
@@ -168,14 +178,15 @@ class Controller
                             exit();
                         }
                     }else{
-                        echo $template->render(array('current'=>'logon','error'=>'vous n\'avez pas mis les deux meme mot de passe'
-                    ));}
+                        echo $template->render(array('current'=>'logon','error'=>'vous n\'avez pas mis les deux meme mot de passe'));}
                 }else{
-                        // set template variables
-                        // render template
-                        echo $template->render(array('current'=>'logon','session'=>$this->session->getSession()
-                    ));
-                };
+                    echo  $template->render(array('current'=>'logon','error'=>'le nom de compte existe deja'));}
+            }else{
+                    // set template variables
+                    // render template
+                    echo $template->render(array('current'=>'logon','session'=>$this->session->getSession()
+                ));
+            };
                    
         } catch (Exception $e) {
             die ('ERROR: ' . $e->getMessage());

@@ -5,33 +5,35 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-	<head>
-		<title>{% block title %}{% endblock %}</title>
-        {% block og %}{% endblock %}
-        {% block css %}{% endblock %}
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-        <link rel="stylesheet" href="/css/normalize.css" />
-		<link rel="stylesheet" href="/css/style.css" />
-	</head>
-	<body class="is-preload">
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% block og %}{% endblock %}
+    {% block css %}{% endblock %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+
+<body class="is-preload">
         <div class="jumbotron">
             <div>
                 {% if session.roles is empty and session.login is empty %}
-                    <a href="/logon" class="{% if current == 'logon' %}white{% endif %}">Inscription</a> / 
-                    <a href="/login" class="{% if current == 'login' %}white{% endif %}">Connexion</a>
-                    {% else %}
-                    {% if session.roles == 'admin' %}
-                    <a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a> /
-                    <a href="/admin" class="{% if current == 'admin' %}white{% endif %}">Administration</a> /
-                    <a href="/deconnexion">Deconnexion</a>
-                    {% else %}
-                    <a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a> /
-                    <a href="/deconnexion">Deconnexion</a>
-                    {% endif %}
+                <a href="/logon" class="{% if current == 'logon' %}white{% endif %}">Inscription</a> /
+                <a href="/login" class="{% if current == 'login' %}white{% endif %}">Connexion</a>
+                {% else %}
+                {% if session.roles == 'admin' %}
+                <a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a> /
+                <a href="/admin" class="{% if current == 'admin' %}white{% endif %}">Administration</a> /
+                <a href="/deconnexion">Deconnexion</a>
+                {% else %}
+                <a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a> /
+                <a href="/deconnexion">Deconnexion</a>
+                {% endif %}
                 {% endif %}
             </div>
-            <img class="avatar" src="/img/Griffont_Termine.png"/>
+            <img class="avatar" src="/img/Griffont_Termine.png" />
             <h1>BUHLER GEOFFRAY</h1>
             <h2>Ça va durer longtemps ? Prends-toi un Griffont.</h2>
         </div>
@@ -42,25 +44,32 @@
                     <a class="menuadd {% if current == 'articles' %}active{% endif %}" href="/articles">Articles</a>
                 </div>
                 <div>
-                    <a class="icon" target="_blank" href="https://www.twitch.tv/griffont39"><i class="fab fa-twitch"></i></a>
-                    <a class="icon" target="_blank" href="https://twitter.com/griffont39"><i class="fab fa-twitter-square"></i></a>
-                    <a class="icon" target="_blank" href="https://www.linkedin.com/in/geoffray-buhler-93100099/"><i class="fab fa-linkedin"></i></a>
-                    <a class="icon" target="_blank" href="https://github.com/Geoffray-buhler"><i class="fab fa-github"></i></a>
+                    <a class="icon" target="_blank" href="https://www.twitch.tv/griffont39"><i
+                            class="fab fa-twitch"></i></a>
+                    <a class="icon" target="_blank" href="https://twitter.com/griffont39"><i
+                            class="fab fa-twitter-square"></i></a>
+                    <a class="icon" target="_blank" href="https://www.linkedin.com/in/geoffray-buhler-93100099/"><i
+                            class="fab fa-linkedin"></i></a>
+                    <a class="icon" target="_blank" href="https://github.com/Geoffray-buhler"><i
+                            class="fab fa-github"></i></a>
                 </div>
             </nav>
             <div class="content">
                 <div class="d-flex center column">
-                {% if succes %}
-                    <p style="padding:1rem; background-color:#00ff0050;color:#00ff00;border-radius: 10px;">{{message}}</p>
-                {% endif %}
-                {% if error %}
-                    <p style="padding:1rem; background-color:#ff000050;color:#ff0000;border-radius: 10px;">{{message}}</p>
-                {% endif %}
-                {% block content %}
-                {% endblock %}
+                    {% if succes %}
+                    <p style="padding:1rem; background-color:#00ff0050;color:#00ff00;border-radius: 10px;">{{message}}
+                    </p>
+                    {% endif %}
+                    {% if error %}
+                    <p style="padding:1rem; background-color:#ff000050;color:#ff0000;border-radius: 10px;">{{message}}
+                    </p>
+                    {% endif %}
+                    {% block content %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
         <script src="https://kit.fontawesome.com/6e28c03334.js" crossorigin="anonymous"></script>
-	</body>
+</body>
+
 </html>

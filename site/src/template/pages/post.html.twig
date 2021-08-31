@@ -10,10 +10,16 @@
     </div>
     {% if comments is not empty %}
     <h3>Commentaire(s)</h3>
-        {% for comment in comments %}
-        <div class="comment">
+        {% for key, comment in comments %}
+        <div class="d-flex comment">
             <h4>{{comment.title}}</h4>
             <p>{{comment.body}}</p>
+            {% if session.roles == 'admin' %}
+                <form action="/delete/comment" class="flexend" method="POST">
+                    <input type="hidden" name="supprimer" value="comment">
+                    <input class="errorbtn" type="submit" name="submit" value="X">
+                </form>
+            {% endif %}
         </div>
         {% endfor %}
     {% endif %}
@@ -23,7 +29,7 @@
             <textarea class="mt-1 textarea" type="textarea" name="body" placeholder="Commentaire"></textarea>
             <input type="hidden" name="idpost" value={{article[0].id}}></input>
             <input type="hidden" name="iduser" value={{session.id}}></input>
-            <input class="mt-1" type="submit" name="submit" value="Commenter"></input>
+            <input class="mt-1 btnprimary" type="submit" name="submit" value="Commenter"></input>
         </form>
     {% endif %}
 {% endblock %}
