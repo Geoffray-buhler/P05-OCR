@@ -8,3 +8,5 @@ class Config {
     */
     const PATH_TO_SQLITE_FILE = './phpsqlite.db';
 }
+
+//TODO Oauth 2.0, Gmail Google, 
