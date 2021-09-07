@@ -66,7 +66,7 @@ class Controller
                 $this->post["email"] = $this->post[2]; 
                 $this->post["body"] = $this->post[3];
                 if (filter_var($this->post['email'], FILTER_VALIDATE_EMAIL)) {
-                    new sendMail($this->post["name"],$this->post["email"],'griffont.rf@gmail.com',$this->post["body"],$this->post["subject"]);
+                    new Mail($this->post["name"],$this->post["email"],$this->post["body"],$this->post["subject"]);
                 };
             };
                 echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession()
@@ -292,7 +292,14 @@ class Controller
     {
         try {
             if(!empty($this->post)){
-                (new Debug)->vardump($this->post);
+                $sqget = new SQLiteGet($this->conn);
+                $user = $sqget->getUserWithEmail($this->post);
+                (new Debug)->vardump($user);
+                if ($user) {
+                    echo 'ce mail existe pas !';
+                }else{
+                    echo "cette adresse email existe pas !";
+                }
             }
             // load template
             $template = $this->twig->load('pages/lostgin.html.twig');

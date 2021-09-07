@@ -89,4 +89,20 @@ class SQLiteGet {
         }
         return $result;
     }
+
+    /**
+    * get the user in the database
+    */
+    public function getUserWithEmail($email) {
+        $sql = 'SELECT * FROM users WHERE email=":email"';
+        $stmt = $this->pdo->prepare($sql);
+        $email = $email[0]; 
+        $result = $stmt->execute([
+            ":email"=> $email
+        ]);
+        if ($result) { 
+            $result = $stmt->fetchAll();
+        }
+        return $result;
+    }
 }
