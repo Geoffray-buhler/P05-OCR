@@ -419,6 +419,39 @@ class Controller
         }
     }
 
+    function modifyarticles($id)
+    {
+        $infos_user = $this->session->getSession();
+        $sqlite = new SQLiteGet($this->conn);
+        $article = $sqlite->getArticle($id);
+        if (isset($this->post)) {
+            if(isset($_FILES['file'])){
+                $tmpName = $_FILES['file']['tmp_name'];
+                $name = $this->session->session['login'].$this->session->session['id'].$_FILES['file']['name'];
+                move_uploaded_file($tmpName, './uploads/'.$name);
+            }
+            $articleTitle = $this->post[0];
+            $articleBody = $this->post[1];
+            $userId = $this->session->session['id'];
+            $sqlite = new SQLiteSet($this->conn);
+            $sqlite->updateArticles($articleTitle,$articleBody,$userId,$name,$id);
+            $this->session->setSession('succes','Votre article est bien poster');
+            header("Location: /");
+        }
+        try {   
+            // load template
+            $template = $this->twig->load('pages/createdArticles.html.twig');
+        
+            // set template variables
+            // render template
+            echo $template->render(array('current'=>'createdArticles','session'=>$infos_user,'article'=>$article
+            ));
+        
+        } catch (Exception $e) {
+            die ('ERROR: ' . $e->getMessage());
+        }
+    }
+
     function Deletecomms($id){
         // load template
         $template = $this->twig->load('pages/articles.html.twig');

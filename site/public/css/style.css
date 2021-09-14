@@ -170,6 +170,22 @@ nav a:hover{
     transition: 1s;
 }
 
+.btn-warning{
+    background-color: #ffc44450;
+    border: solid 1px #ffae44;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.btn-warning:hover{
+    background-color: #ffae44;
+    border: solid 1px #ffc44450;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
 .button{
     margin-block-start: 1em;
     margin-block-end: 1em;

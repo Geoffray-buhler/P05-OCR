@@ -33,6 +33,22 @@ class SQLiteSet {
         return $this->pdo->lastInsertId();
     }
 
+        /**
+    * set an article in BDD
+    */
+    public function updateArticles($title,$body,$users_id,$name,$id) {
+        $sql = 'UPDATE articles SET title=:title,body=:body,filename=:fileName,users_id=:users_id WHERE id=:id';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':title'=> $title,
+            ':body'=> $body,
+            ':users_id'=>$users_id,
+            ':fileName'=>$name,
+            ':id'=>$id,
+        ]);
+        return $this->pdo->lastInsertId();
+    }
+
     /**
     * set an commentary in BDD
     */

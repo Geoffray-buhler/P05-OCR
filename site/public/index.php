@@ -14,6 +14,15 @@ function index(){
 
     $url = $_SERVER['REQUEST_URI'];
 
+    // function router pour la modification des articles 
+    if (strpos($url,'post/modify')) {
+        if(preg_match("/\/(\d+)$/",$url,$matches))
+        {
+            $id = $matches[1];
+            return (new Controller)->modifyarticles($id);
+        }
+    }
+
     // function router pour les article 
     if (strpos($url,'post')) {
         if(preg_match("/\/(\d+)$/",$url,$matches))
