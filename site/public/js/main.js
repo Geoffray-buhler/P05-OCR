@@ -1,8 +1,10 @@
-function updatemenu() {
-    if (document.getElementById('responsive-menu').checked == true) {
-      document.getElementById('menu').style.borderBottomRightRadius = '0';
-      document.getElementById('menu').style.borderBottomLeftRadius = '0';
-    }else{
-      document.getElementById('menu').style.borderRadius = '5px';
-    }
+const btn = document.querySelector('.btn-hamburger');
+const div = document.querySelector('#hamburger');
+
+btn.addEventListener('click',(e)=>{
+  if(div.classList.contains('d-none')){
+      div.classList.remove('d-none')
+  }else{
+      div.classList.add('d-none')
   }
+})

@@ -5,14 +5,28 @@ namespace Controller;
 // require dirname(__DIR__).'\..\vendor\autoload.php';
 
 use App\Debug;
+use Twig\Environment;
 use PHPMailer\PHPMailer\SMTP;
+use Twig\Loader\FilesystemLoader;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Mail
 {
-    function __construct($name,$email,$msg,$subject)
+    public $twig;
+
+    function __construct($name,$email,$msg,$subject,$raisonEmail,$AdressToSend,$template,$acctu)
     {
+        // le dossier ou on trouve les templates
+        $loader = new FilesystemLoader('../src/template');
+        
+        // initialiser l'environement Twig
+        $this->twig = new Environment($loader,[
+            'debug' => true,
+        ]);
+
+        $this->twig->addExtension(new \Twig\Extension\DebugExtension());
+
         $mail = new PHPMailer(true);
 
         try {
@@ -27,18 +41,23 @@ class Mail
             $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
             //Recipients
-            $mail->setFrom($email, 'Information contact blog');
-            $mail->addAddress('Griffont.RF@gmail.com');  
+            $mail->setFrom($email, $raisonEmail);
+            $mail->addAddress($AdressToSend);  
             $mail->addReplyTo($email);
         
             //Content
             $mail->isHTML(true);                                        //Set email format to HTML
             $mail->Subject = $subject;
-            $mail->Body = '<div style="background-color:#dedede;padding:1rem;">';
-            $mail->Body.= '<h2>'.$name.'</h2>';
-            $mail->Body.= '<br/>';
-            $mail->Body.= '<div style="background-color:red;padding:1rem;">'.$msg.'</div>';
-            $mail->Body.= '</div>';
+                                                                        // le dossier ou on trouve les templates
+            $loader = new FilesystemLoader('../src/template');
+        
+            // initialiser l'environement Twig
+            $this->twig = new Environment($loader,[
+                'debug' => true,
+            ]);
+            $this->twig->addExtension(new \Twig\Extension\DebugExtension());
+            $template = $this->twig->load('email/mail.html.twig');
+            $mail->Body = $template->render(['name'=>$name,'msg'=>$msg,'acctu'=>$acctu]);
 
             $mail->send();
             echo 'Message has been sent';
