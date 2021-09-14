@@ -24,15 +24,15 @@ class SQLiteCreateTable {
     public function createTables() {
         $commands = [
             'CREATE TABLE IF NOT EXISTS users (
-                id INTEGER PRIMARY KEY,
+                id INTEGER PRIMARY KEY UNIQUE,
                 type VARCHAR (50) NOT NULL,
-                login VARCHAR (50) NOT NULL,
-                email VARCHAR (50) NOT NULL,
+                login VARCHAR (50) NOT NULL UNIQUE,
+                email VARCHAR (50) NOT NULL UNIQUE,
                 password VARCHAR (50) NOT NULL,
                 CONSTRAINT users UNIQUE (id,login)
             )','CREATE TABLE IF NOT EXISTS articles (
-                id INTEGER PRIMARY KEY,
-                title  VARCHAR (50) NOT NULL,
+                id INTEGER PRIMARY KEY UNIQUE,
+                title  VARCHAR (50) NOT NULL UNIQUE,
                 body  TEXT NOT NULL,
                 fileName VARCHAR (50),
                 users_id INTEGER,
@@ -40,7 +40,7 @@ class SQLiteCreateTable {
                 REFERENCES users(id) ON UPDATE CASCADE
                 ON DELETE CASCADE
             )','CREATE TABLE IF NOT EXISTS comments (
-                id INTEGER PRIMARY KEY,
+                id INTEGER PRIMARY KEY UNIQUE,
                 title VarChar (50) NOT NULL,
                 body TEXT NOT NULL,
                 users_id INTEGER,

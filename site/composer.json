@@ -4,7 +4,8 @@
             "App\\": "./src",
             "Controller\\": "./src/controllers",
             "Model\\": "./src/template",
-            "Bdd\\": "./src/db"
+            "Bdd\\": "./src/db",
+            "Utils\\": "./src/utils"
         }
     },
     "require": {

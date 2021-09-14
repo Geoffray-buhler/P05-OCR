@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-require dirname(__DIR__).'\..\vendor\autoload.php';
+// require dirname(__DIR__).'\..\vendor\autoload.php';
 
 use App\Debug;
 use PHPMailer\PHPMailer\SMTP;

@@ -7,6 +7,7 @@ use App\Debug;
 use Exception;
 use Bdd\SQLiteGet;
 use Bdd\SQLiteSet;
+use Controller\Mail;
 use Bdd\SQLiteDelete;
 use Twig\Environment;
 use Controller\Security;
@@ -14,9 +15,9 @@ use Bdd\SQLiteConnection;
 use Bdd\SQLiteCreateTable;
 use Controller\SessionManager;
 use Twig\Loader\FilesystemLoader;
+use Utils\PswGen;
 
-
-require dirname(__DIR__).'\..\vendor\autoload.php';
+// require dirname(__DIR__).'\..\vendor\autoload.php';
 
 class Controller
 {  
@@ -273,8 +274,20 @@ class Controller
     {
         try {
             if(!empty($this->post)){
-                (new Debug)->vardump($this->post);
+
+                $sqget = new SQLiteGet($this->conn);
+
+                $useracc = $sqget->getUserFromLogAndMail($this->post[0],$this->post[1]);
+
+                if($useracc){
+                    $sqlset = new SQLiteSet($this->conn);
+                    $psw = (new PswGen)->generation(20);
+                    $cryptedPassword = password_hash($psw,PASSWORD_DEFAULT);
+                    $sqlset->updateUser($useracc['id'],$cryptedPassword);
+                    new Mail($useracc['login'],$useracc['email'],'Votre nouveau mot de passe est : '.$psw,'Votre nouveau Mot de passe penser a le changer !!!');
+                }
             }
+
             // load template
             $template = $this->twig->load('pages/lost.html.twig');
         
@@ -293,10 +306,9 @@ class Controller
         try {
             if(!empty($this->post)){
                 $sqget = new SQLiteGet($this->conn);
-                $user = $sqget->getUserWithEmail($this->post);
-                (new Debug)->vardump($user);
+                $user = $sqget->getUserWithEmail($this->post[0]);
                 if ($user) {
-                    echo 'ce mail existe pas !';
+                    new Mail($user[0]['login'],$user[0]["email"],"Voici votre nom de compte : ".$user[0]['login'],"Votre nom de compte");
                 }else{
                     echo "cette adresse email existe pas !";
                 }
