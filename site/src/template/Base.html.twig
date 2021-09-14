@@ -58,11 +58,11 @@
                 <div class="d-flex center column">
                     {% block content %}
                         {% if succes %}
-                            <p style="padding:1rem; background-color:#00ff0050;color:#00ff00;border-radius: 10px;">{{message}}
+                            <p style="padding:1rem; background-color:#00ff0050;color:#00ff00;border-radius: 10px;">{{succes}}
                             </p>
                         {% endif %}
                         {% if error %}
-                            <p style="padding:1rem; background-color:#ff000050;color:#ff0000;border-radius: 10px;">{{message}}
+                            <p style="padding:1rem; background-color:#ff000050;color:#ff0000;border-radius: 10px;">{{error}}
                             </p>
                         {% endif %}
                     {% endblock %}
