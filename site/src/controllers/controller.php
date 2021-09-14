@@ -146,23 +146,22 @@ class Controller
             // load template
             $template = $this->twig->load('pages/logon.html.twig');
             if (!empty($this->post)) {
-                    $is_ok=0;
+                    $is_ok=[];
                     $cleanarray = (new Security)->cleanInput($this->post);
                     $allusers = (new SQLiteGet($this->conn))->getAllUsers();
-                    if ($allusers) {
+                    
+                    if (!empty($allusers)) {
                         for ($i=0; $i <count($allusers) ; $i++) {
-                            var_dump($allusers[$i],$cleanarray[0]);
-                            die;
                             if ($allusers[$i] === $cleanarray[0]) {
-                                $is_ok=0;
+                                array_push($is_ok,0);
                             }else{
-                                $is_ok=1;
+                                array_push($is_ok,1);
                             }
                         }
                     }else{
-                        $is_ok=1;
+                        array_push($is_ok,0);
                     }
-                if ($is_ok) {
+                if (array_sum($is_ok) === 0) {
                     $password= $cleanarray[2];
                     $confPassword = $cleanarray[3];
                     if ($password === $confPassword) {
@@ -183,12 +182,15 @@ class Controller
                             exit();
                         }
                     }else{
+                        $template = $this->twig->load('pages/logon.html.twig');
                         echo $template->render(array('current'=>'logon','error'=>'vous n\'avez pas mis les deux meme mot de passe'));}
                 }else{
+                    $template = $this->twig->load('pages/logon.html.twig');
                     echo  $template->render(array('current'=>'logon','error'=>'le nom de compte existe deja'));}
             }else{
                     // set template variables
                     // render template
+                    $template = $this->twig->load('pages/logon.html.twig');
                     echo $template->render(array('current'=>'logon','session'=>$this->session->getSession()
                 ));
             };

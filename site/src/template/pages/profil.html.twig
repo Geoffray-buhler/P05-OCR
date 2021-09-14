@@ -8,6 +8,7 @@
 
 {% block content %}
 <h1>Profil</h1>
+{{ parent() }}
 <p>Nom du compte : {{session.login}}</p>
 <div class="d-flex">
     <form action="#" method="post"><button class="mr-1 btn-error" type="submit" name="delete">Supprimer son compte</button></form>

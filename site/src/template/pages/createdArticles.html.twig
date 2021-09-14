@@ -5,6 +5,7 @@
 {% endblock %}
 {% block content %}
     <h1>Nouvelle article</h1>
+    {{ parent() }}
     <form class="d-flex column" action="#" method="POST" enctype="multipart/form-data">
         <input class="input" type="text" name="title" placholder="Titre">
         <textarea class="mt-1 textarea" type="textarea" name="body" placholder="Article"></textarea>

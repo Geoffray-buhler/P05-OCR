@@ -5,6 +5,7 @@
 {% endblock %}
 {% block content %}
     <h1>{{article[0].title}}</h1>
+    {{ parent() }}
     <div class="articleMain">
     {% if article[0].fileName is defined %}
         <img src="/uploads/{{article[0].fileName}}" alt="image du post {{article[0].title}}"/>
