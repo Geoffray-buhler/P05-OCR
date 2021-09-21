@@ -1,8 +1,5 @@
-//Rewrite to www
-Options +FollowSymLinks
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^https://griffont39.yn.lu/[nc]
-RewriteRule ^(.*)$ http://www.https://griffont39.yn.lu//$1 [r=301,nc]
-
-//301 Redirect Entire Directory
-RedirectMatch 301 https://griffont39.yn.lu/(.*) https://griffont39.yn.lu/public//$1
+Options +FollowSymLinks -Indexes
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ public/index.php [L]
