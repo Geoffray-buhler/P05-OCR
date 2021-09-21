@@ -21,13 +21,45 @@ class SQLiteSet {
     /**
     * set an article in BDD
     */
-    public function setArticles($title,$body,$users_id) {
-        $sql = 'INSERT INTO articles(title,body,users_id) VALUES(:title,:body,:users_id)';
+    public function setArticles($title,$body,$users_id,$name) {
+        $sql = 'INSERT INTO articles(title,body,fileName,users_id) VALUES(:title,:body,:fileName,:users_id)';
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             ':title'=> $title,
             ':body'=> $body,
             ':users_id'=>$users_id,
+            ':fileName'=>$name
+        ]);
+        return $this->pdo->lastInsertId();
+    }
+
+        /**
+    * set an article in BDD
+    */
+    public function updateArticles($title,$body,$users_id,$name,$id) {
+        $sql = 'UPDATE articles SET title=:title,body=:body,filename=:fileName,users_id=:users_id WHERE id=:id';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':title'=> $title,
+            ':body'=> $body,
+            ':users_id'=>$users_id,
+            ':fileName'=>$name,
+            ':id'=>$id,
+        ]);
+        return $this->pdo->lastInsertId();
+    }
+
+    /**
+    * set an commentary in BDD
+    */
+    public function setComment($title,$body,$users_id,$article_id) {
+        $sql = 'INSERT INTO comments(title,body,users_id,articles_id) VALUES(:title,:body,:users_id,:articles_id)';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ':title'=> $title,
+            ':body'=> $body,
+            ':users_id'=>$users_id,
+            ':articles_id'=>$article_id
         ]);
         return $this->pdo->lastInsertId();
     }
@@ -58,13 +90,4 @@ class SQLiteSet {
         ]);
         return $this->pdo->lastInsertId();
     }
-
-    /**
-    * set an comment in BDD
-    * @var comment string
-    */
-    public function setComment() {
-
-    }
-
 }

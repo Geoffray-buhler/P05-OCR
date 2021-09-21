@@ -26,4 +26,13 @@ class SQLiteDelete {
         ]);
         return 'Compte bien supprimé';
     }
+
+    public function DeleteComment($id){
+        $sql = "DELETE FROM comments WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            ":id"=> $id
+        ]);
+        return 'le commentaire a bien supprimé';
+    }
 }

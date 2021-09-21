@@ -1,11 +1,15 @@
 @import url(fontawesome-all.min.css);
 
-@font-face {
+@font-face 
+{
     font-family: "AbsoluteEmpire";
     src: url("/template/police/aAbsoluteEmpire.otf") format("otf");
 }
 
-body{
+body
+{
+    padding:2rem 0 2rem 0;
+    width: 100%;
     background-color: #0e2336;
     display: flex;
     flex-direction: column;
@@ -13,11 +17,19 @@ body{
     align-items: center;
 }
 
-h1, h2, h3, h4, h5{
+h1, h2, h3, h4, h5
+{
     font-family: 'AbsoluteEmpire';
 }
 
-a{text-decoration: none;color: rgb(0, 0, 0);}
+a
+{
+    text-decoration: none;color: rgb(0, 0, 0);
+}
+
+.d-none{
+    display:none!important;
+}
 
 .icon{
     padding: 1rem;
@@ -99,6 +111,8 @@ nav {
     display: flex;
     justify-content: space-between;
     margin: 0;
+    position: relative;
+    background: linear-gradient(0deg, rgb(138, 138, 138), #e9e9e9);
 }
 
 .active{
@@ -116,6 +130,10 @@ nav {
 
 nav a {
     transition: 1s;
+}
+
+nav:after {
+	filter: blur(50px);
 }
 
 nav a:hover{
@@ -156,11 +174,68 @@ nav a:hover{
     transition: 1s;
 }
 
+.btn-warning{
+    background-color: #ffc44450;
+    border: solid 1px #ffae44;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
+.btn-warning:hover{
+    background-color: #ffae44;
+    border: solid 1px #ffc44450;
+    padding: 5px;
+    border-radius: 10px;
+    transition: 1s;
+}
+
 .button{
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0px;
     margin-inline-end: 0px;
+}
+.flexend{
+    align-self: flex-end!important;
+}
+.errorbtn{
+    background-color: #ff000025!important;
+    color: #ff0000!important;
+    border: solid 1px #ff0000!important;
+    transition: 1s;
+}
+
+.errorbtn:hover{
+    background-color: #ff0000!important;
+    color: #ff000025!important;
+    border: solid 1px #ff000025!important;
+    transition: 1s;
+}
+
+.input{
+    border-radius: 1rem;
+    padding:5px;
+    border: none;
+    margin:1rem;
+    box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.1);
+}
+
+.textarea{
+    border-radius: 1rem;
+    padding:5px;
+    border: none;
+    height: 200px;
+    margin:1rem;
+    box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.1);
+}
+
+.rounded{
+    border-radius: 500px;
+}
+
+.w80p{
+    width: 80%;
 }
 
 .m-1{
@@ -185,14 +260,22 @@ nav a:hover{
 
 .articleMain{
     padding: 1rem;
-    background-color: #2a2f6680;
-    border: solid #0e2336 1px;
+background-color: #0c48a350;
+    border-radius: 1rem;
+    width: 80%;
+}
+
+.articleMain img{
     width: 80%;
 }
 
 .link{
     color: #42afaf;
     transition: 0.3s;
+}
+
+.btn-hamburger{
+    display: none;
 }
 
 .link:hover{
@@ -204,9 +287,94 @@ nav a:hover{
     width: 84%;
 }
 
-.textarea{
-    width: 300px;
-    height: 150px;
+.bubble-text{background:#139ee0; color:#fff; padding:7px 15px; border-radius:3px; width:350px;}
+
+.bubble-text::after{
+content:""; 
+border-left:20px solid transparent;
+border-right:20px solid transparent;
+border-top: 20px solid #139ee0;
+position: absolute;
+}
+
+.logonot{
+    align-self: auto;
+    height: 180px;
+    width: 120px;
+}
+
+.btnprimary{
+    background-color: #0e2336;
+    border-radius: 3px;
+    border: none;
+    color: #4455ff;
+    font-size: larger;
+    padding: 1rem;
+    transition: 0.5s;
+    border-radius: 1rem;
+}
+
+.btnprimary:hover{
+    background-color: #3d94e0;
+    color: #0f133a;
+    transition: 0.5s;
+}
+
+.comment{
+    border-radius: 1rem;
+    display:flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.2);
+    min-width:40% ;
+}
+
+.comment h4{
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+.comment p{
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+.hamburger{
+    display: flex;
+    flex-direction: column;
+}
+#hamburger{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #ffffff;
+}
+
+@media screen and (max-width: 580px) {
+    .normale{
+        display: none;
+    }
+    .btn-hamburger{
+        display: flex;
+        margin-left:1rem;
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png');
+        background-size: cover;
+        height: 50px;
+        width: 50px;
+    }
+    .d-flex{
+        display: flex;
+        flex-direction: column;
+    }
+    .avatar{
+        display: none;
+    }
+    .jumbotron{
+        text-align: center;
+    }
 }
 
 @keyframes float {

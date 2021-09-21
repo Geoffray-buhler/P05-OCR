@@ -1,0 +1,39 @@
+{% extends "/Base.html.twig" %}
+{% block title %}Accueil{% endblock %}
+{% block head %}
+{{ parent() }}
+{% endblock %}
+{% block content %}
+    <h1>{{article[0].title}}</h1>
+    {{ parent() }}
+    <div class="articleMain">
+    {% if article[0].fileName is defined %}
+        <img src="/uploads/{{article[0].fileName}}" alt="image du post {{article[0].title}}"/>
+    {% endif %}
+    <p class="begin">{{ article[0].body }}</p>
+    </div>
+    {% if comments is not empty %}
+    <h3>Commentaire(s)</h3>
+        {% for key, comment in comments %}
+        <div class="d-flex comment">
+            <h4>{{comment.title}}</h4>
+            <p>{{comment.body}}</p>
+            {% if session.roles == 'admin' %}
+                <form action="/delete/comment/{{comment.id}}" class="flexend" method="POST">
+                    <input type="hidden" name="supprimer" value="comment">
+                    <input class="errorbtn rounded" type="submit" name="submit" value="X">
+                </form>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% if  session.roles == ('User' or 'admin') %}
+        <form class="d-flex column mt-1" action="#" method="POST">
+            <input class="input" type="text" name="title" placeholder="Titre du commentaire"></input>
+            <textarea class="mt-1 textarea" type="textarea" name="body" placeholder="Commentaire"></textarea>
+            <input class="input" type="hidden" name="idpost" value={{article[0].id}}></input>
+            <input class="input" type="hidden" name="iduser" value={{session.id}}></input>
+            <input class="mt-1 btnprimary" type="submit" name="submit" value="Commenter"></input>
+        </form>
+    {% endif %}
+{% endblock %}

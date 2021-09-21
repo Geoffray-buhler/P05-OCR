@@ -4,7 +4,7 @@ use App\Debug;
 use Controller\Controller;
 use Controller\SessionManager;
 
-require dirname(__DIR__).'\vendor\autoload.php';
+require dirname(__DIR__).'/vendor/autoload.php';
 
 function index(){
 
@@ -13,22 +13,28 @@ function index(){
 
     $url = $_SERVER['REQUEST_URI'];
 
-    // function router 
-
-    //TODO regex 
-
-    if (strpos($url,'/article/')) {
+    // function router pour la modification des articles 
+    if (strpos($url,'post/modify')) {
         if(preg_match("/\/(\d+)$/",$url,$matches))
         {
-            $lastPartUri = $matches[1];
-            (new Debug)->vardump($lastPartUri);
-            die();
-        }
-    else
-        {
-            //Your URL didn't match.  This may or may not be a bad thing.
+            $id = $matches[1];
+            return (new Controller)->modifyarticles($id);
         }
     }
+
+    // function router pour les article 
+    if (strpos($url,'post')) {
+        if(preg_match("/\/(\d+)$/",$url,$matches))
+        {
+            $id = $matches[1];
+            return (new Controller)->article($id);
+        }
+    }
+
+    if (strpos($url,'delete/comment')) {
+        $id = substr($url,16);
+        return (new Controller)->Deletecomms($id);
+        }
 
     switch (parse_url($url)['path'])
     {
@@ -36,55 +42,53 @@ function index(){
             (new Controller)->home();
         break;
         case '/logon':
-            (new Controller)->register();
+            return (new Controller)->register();
         break;
         case '/login':
-            (new Controller)->login();
+            return (new Controller)->login();
         break;
         case '/home':
-            (new Controller)->home();
+            return (new Controller)->home();
         break;
         case '/articles':
-            (new Controller)->articles();
+            return (new Controller)->articles();
         break;
         case '/admin':
             if ($session['roles'] === 'admin') {
-                (new Controller)->admin();
+                return (new Controller)->admin();
             }else
             {
-                (new Controller)->pages404();
+                return (new Controller)->pages404();
             }
         break;
         case '/profil/modify':
-            (new Controller)->modify();
+            return (new Controller)->modify();
         break;
         case '/profil':
-            (new Controller)->profil();
+            return (new Controller)->profil();
         break;
         case '/deconnexion':
-            (new Controller)->deconnexion();
+            return (new Controller)->deconnexion();
         break;
         case '/post/create':
             if ($session['roles'] === 'admin') {
-                (new Controller)->newarticles();
+                return (new Controller)->newarticles();
             }
             else
             {
-                (new Controller)->pages404();
+                return (new Controller)->pages404();
             }
         break;
         case '/lost/password':
-            (new Controller)->PasswordLost();
+            return (new Controller)->PasswordLost();
         break;
         case '/lost/login':
-            (new Controller)->LoginLost();
+            return (new Controller)->LoginLost();
         break;
         default:
-            (new Controller)->pages404();
+            return (new Controller)->pages404();
     }
 }
-
-
 
 // call Router function
 index();
