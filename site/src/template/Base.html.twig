@@ -23,29 +23,29 @@
 		<meta property="og:image" content="http://griffont39.alwaysdata.net/img/Og_Griffont.png">
 	</head>
 	<body class="is-preload">
-		<div class="jumbotron">
-			<div>
-				{% if session.roles is empty and session.login is empty %}
-					<a href="/logon" class="{% if current == 'logon' %}white{% endif %}">Inscription</a>
-					/
-					<a href="/login" class="{% if current == 'login' %}white{% endif %}">Connexion</a>
-				{% else %}
-					{% if session.roles == 'admin' %}
-						<a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a>
+		<div id="particles-js" class="jumbotron ">
+				<div>
+					{% if session.roles is empty and session.login is empty %}
+						<a href="/logon" class="{% if current == 'logon' %}white{% endif %}">Inscription</a>
 						/
-						<a href="/admin" class="{% if current == 'admin' %}white{% endif %}">Administration</a>
-						/
-						<a href="/deconnexion">Deconnexion</a>
+						<a href="/login" class="{% if current == 'login' %}white{% endif %}">Connexion</a>
 					{% else %}
-						<a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a>
-						/
-						<a href="/deconnexion">Deconnexion</a>
+						{% if session.roles == 'admin' %}
+							<a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a>
+							/
+							<a href="/admin" class="{% if current == 'admin' %}white{% endif %}">Administration</a>
+							/
+							<a href="/deconnexion">Deconnexion</a>
+						{% else %}
+							<a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a>
+							/
+							<a href="/deconnexion">Deconnexion</a>
+						{% endif %}
 					{% endif %}
-				{% endif %}
-			</div>
-			<img class="avatar" src="/img/Griffont_Termine.png"/>
-			<h1>BUHLER GEOFFRAY</h1>
-			<h2>Griffont39 - réinventons la roue.</h2>
+				</div>
+				<img class="avatar" src="/img/Griffont_Termine.png"/>
+				<h1>BUHLER GEOFFRAY</h1>
+				<h2>Griffont39 - réinventons la roue.</h2>
 		</div>
 		<div class="main">
 			<nav>
@@ -102,8 +102,9 @@
 				</div>
 			</div>
 		</div>
-        <script src="./js/main.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 		<script src="https://kit.fontawesome.com/6e28c03334.js" crossorigin="anonymous"></script>
+        <script src="./js/main.js" crossorigin="anonymous"></script>
+		<script src="./js/jumbo.js" crossorigin="anonymous"></script>
 	</body>
-
 </html>

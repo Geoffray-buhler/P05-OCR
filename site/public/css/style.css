@@ -17,6 +17,13 @@ body
     align-items: center;
 }
 
+canvas {
+    z-index: 90000;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 h1, h2, h3, h4, h5
 {
     font-family: 'AbsoluteEmpire';
@@ -51,7 +58,9 @@ a
 }
 
 .jumbotron{
+    overflow: hidden;
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: center;
     align-items: center;
