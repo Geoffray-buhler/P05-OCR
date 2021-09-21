@@ -33,10 +33,10 @@ class Mail
             //Server settings
             //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                    //Enable verbose debug output
             $mail->isSMTP();                                            //Send using SMTP
-            $mail->Host       = 'smtp.gmail.com';                       //Set the SMTP server to send through
+            $mail->Host       = 'smtp-griffont39.alwaysdata.net';       //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'Griffont.RF@gmail.com';                //SMTP username
-            $mail->Password   = 'HUB10base-t';                          //SMTP password
+            $mail->Username   = 'griffont39@alwaysdata.net';            //SMTP username
+            $mail->Password   = 'AU2nHF3mHC@H9py';                      //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         //Enable implicit TLS encryption
             $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
         
