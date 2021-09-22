@@ -19,7 +19,7 @@ use Utils\PswGen;
 
 // require dirname(__DIR__).'\..\vendor\autoload.php';
 
-//TODO Screen reader aria-label= sur les <a></a> + label sur input 
+//TODO Screen reader aria-label= sur les <a></a> + label sur input / image access
 
 class Controller
 {  
