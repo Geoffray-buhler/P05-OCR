@@ -19,6 +19,8 @@ use Utils\PswGen;
 
 // require dirname(__DIR__).'\..\vendor\autoload.php';
 
+//TODO Screen reader aria-label= sur les <a></a> + label sur input / image access
+
 class Controller
 {  
     public $twig;
@@ -65,7 +67,7 @@ class Controller
             $this->post["email"] = $this->post[2]; 
             $this->post["body"] = $this->post[3];
             if (filter_var($this->post['email'], FILTER_VALIDATE_EMAIL)) {
-                new Mail($this->post["name"],$this->post["email"],$this->post["body"],$this->post["subject"],'Contact blog !','Griffont.RF@gmail.com',$template,'contact');
+                new Mail($this->post["name"],$this->post["email"],$this->post["body"],$this->post["subject"],'Contact blog !','griffont.rf@gmail.com',$template,'contact');
             };
         };
             echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession()]);
@@ -244,7 +246,7 @@ class Controller
                 $psw = (new PswGen)->generation(20);
                 $cryptedPassword = password_hash($psw,PASSWORD_DEFAULT);
                 $sqlset->updateUser($useracc[0]['id'],$cryptedPassword);
-                new Mail($useracc[0]['login'],'Griffont.rf@gmail.com','Votre nouveau mot de passe est : '.$psw,'Oubliez pas de modifier ce Mot de passe lors de votre prochaine connexion !!!','Nouveau mot de passe',$this->post[1],$template,'pswlost');
+                new Mail($useracc[0]['login'],'griffont39@alwaysdata.net','Votre nouveau mot de passe est : '.$psw,'Oubliez pas de modifier ce Mot de passe lors de votre prochaine connexion !!!','Nouveau mot de passe',$this->post[1],$template,'pswlost');
             }
         }
         // set template variables
@@ -264,7 +266,7 @@ class Controller
             $sqget = new SQLiteGet($this->conn);
             $user = $sqget->getUserWithEmail($this->post[0]);
             if ($user) {
-                new Mail($user[0]['login'],'Griffont.rf@gmail.com',"Voici votre nom de compte : ".$user[0]['login'],"Votre nom de compte",'Nom de compte',$user[0]["email"],$template,'nomdecompte');
+                new Mail($user[0]['login'],'griffont39@alwaysdata.net',"Voici votre nom de compte : ".$user[0]['login'],"Votre nom de compte",'Nom de compte',$user[0]["email"],$template,'nomdecompte');
             }else{
                 echo "cette adresse email existe pas !";
             }
@@ -377,11 +379,8 @@ class Controller
     }
 
     function Deletecomms($id){
-        // load template
-        $template = $this->twig->load('pages/articles.html.twig');
 
         $sqlite = new SQLiteGet($this->conn);
-        $articles = $sqlite->getAllArticles();
 
         $sqlite = new SQLiteDelete($this->conn);
         $res = $sqlite->DeleteComment($id);

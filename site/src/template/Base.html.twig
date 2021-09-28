@@ -1,52 +1,47 @@
-<!DOCTYPE HTML>
-<!--
-	Massively by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
 <html>
-
-	<head>
+	<head lang="fr">
 		<title>
 			{% block title %}{% endblock %}
 		</title>
 		{% block og %}{% endblock %}
 		{% block css %}{% endblock %}
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="/css/normalize.css"/>
 		<link rel="stylesheet" href="/css/style.css"/>
 		<meta property="og:title" content="Blog du Griffont39">
-		<meta property="og:site_name" content="Les info du griffont39">
+		<meta property="og:site_name" content="Les infos du griffont39">
 		<meta property="og:url" content="http://griffont39.alwaysdata.net/">
 		<meta property="og:description" content="Blog de présentation de tout plien de choses pour le P05 d'OpenClassRoom">
 		<meta property="og:type" content="article">
-		<meta property="og:image" content="http://griffont39.alwaysdata.net/img/Griffont_Termine.png">
+		<meta property="og:image" content="http://griffont39.alwaysdata.net/img/Og_Griffont.png">
 	</head>
 	<body class="is-preload">
-		<div class="jumbotron">
-			<div>
-				{% if session.roles is empty and session.login is empty %}
-					<a href="/logon" class="{% if current == 'logon' %}white{% endif %}">Inscription</a>
-					/
-					<a href="/login" class="{% if current == 'login' %}white{% endif %}">Connexion</a>
-				{% else %}
-					{% if session.roles == 'admin' %}
-						<a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a>
+		<div id="particles-js" class="jumbotron ">
+				<div>
+					{% if session.roles is empty and session.login is empty %}
+						<a href="/logon" class="{% if current == 'logon' %}white{% endif %}">Inscription</a>
 						/
-						<a href="/admin" class="{% if current == 'admin' %}white{% endif %}">Administration</a>
-						/
-						<a href="/deconnexion">Deconnexion</a>
+						<a href="/login" class="{% if current == 'login' %}white{% endif %}">Connexion</a>
 					{% else %}
-						<a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a>
-						/
-						<a href="/deconnexion">Deconnexion</a>
+						{% if session.roles == 'admin' %}
+							<a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a>
+							/
+							<a href="/admin" class="{% if current == 'admin' %}white{% endif %}">Administration</a>
+							/
+							<a href="/deconnexion">Deconnexion</a>
+						{% else %}
+							<a href="/profil" class="{% if current == 'profil' %}white{% endif %}">Profil</a>
+							/
+							<a href="/deconnexion">Deconnexion</a>
+						{% endif %}
 					{% endif %}
-				{% endif %}
-			</div>
-			<img class="avatar" src="/img/Griffont_Termine.png"/>
-			<h1>BUHLER GEOFFRAY</h1>
-			<h2>Griffont39 - réinventons la roue.</h2>
+				</div>
+				<img class="avatar" src="/img/Griffont_Termine.png"/>
+				<h1>BUHLER GEOFFRAY</h1>
+				<h2>Griffont39 - réinventons la roue.</h2>
 		</div>
 		<div class="main">
 			<nav>
@@ -103,8 +98,9 @@
 				</div>
 			</div>
 		</div>
-        <script src="./js/main.js" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 		<script src="https://kit.fontawesome.com/6e28c03334.js" crossorigin="anonymous"></script>
+        <script src="./js/main.js" crossorigin="anonymous"></script>
+		<script src="./js/jumbo.js" crossorigin="anonymous"></script>
 	</body>
-
 </html>
