@@ -6,20 +6,21 @@
   transform: translateY(-50%);
 }
 
-* {
+*{
   box-sizing: border-box;
 }
 
-html, body {
+html, 
+body 
+{
   margin: 0;
   padding: 0;
 }
 
-body {
+body{
   font-family: "Fira Sans", sans-serif;
   color: #f5f6fa;
 }
-
 .background {
   position: absolute;
   top: 0;
@@ -35,17 +36,10 @@ body {
   height: 25vh;
   background: #0c0e10;
 }
-@media (max-width: 770px) {
-  .background .ground {
-    height: 0vh;
-  }
-}
-
 .container {
   flex-direction: column;
   justify-content: space-around;
 }
-
 .container div{
   position: relative;
   margin: 0 auto;
@@ -54,19 +48,16 @@ body {
   padding-bottom: 25vh;
   display: flex;
 }
-
 .container span{
     position: relative;
     margin: 0 auto;
     width: 85%;
     display: flex;
 }
-
 .column{
   display: flex;
   flex-direction: column;
 }
-
 .night{
   text-align: center;
   text-decoration: none;
@@ -78,36 +69,12 @@ body {
   padding: 0;
   text-shadow: 0 0 1rem #fefefe;
 }
-
-@media (max-width: 770px) {
-  .container {
-    flex-direction: column;
-    padding-bottom: 0vh;
-  }
-}
-
 .left-section, .right-section {
   position: relative;
 }
-
 .left-section {
   width: 40%;
 }
-@media (max-width: 770px) {
-  .left-section {
-    width: 100%;
-    height: 40%;
-    position: absolute;
-    top: 0;
-  }
-}
-@media (max-width: 770px) {
-  .left-section .inner-content {
-    position: relative;
-    padding: 1rem 0;
-  }
-}
-
 .heading {
   text-align: center;
   font-size: 9em;
@@ -116,14 +83,6 @@ body {
   padding: 0;
   text-shadow: 0 0 1rem #fefefe;
 }
-@media (max-width: 770px) {
-  .heading {
-    font-size: 7em;
-    line-height: 1.15;
-    margin: 0;
-  }
-}
-
 .subheading {
   text-align: center;
   max-width: 480px;
@@ -132,26 +91,6 @@ body {
   padding: 0 1rem;
   margin: 0 auto;
 }
-@media (max-width: 770px) {
-  .subheading {
-    font-size: 1.3em;
-    line-height: 1.15;
-    max-width: 100%;
-  }
-}
-
-.right-section {
-  width: 50%;
-}
-@media (max-width: 770px) {
-  .right-section {
-    width: 100%;
-    height: 60%;
-    position: absolute;
-    bottom: 0;
-  }
-}
-
 .svgimg {
   position: absolute;
   bottom: 0;
@@ -160,10 +99,8 @@ body {
   max-width: 100%;
   max-height: 100%;
 }
-@media (max-width: 770px) {
-  .svgimg {
-    padding: 0;
-  }
+.right-section {
+  width: 50%;
 }
 .svgimg .bench-legs {
   fill: #0c0e10;
@@ -187,6 +124,45 @@ body {
 }
 .svgimg .lamp-light {
   fill: #EFEFEF;
+}
+
+@media (max-width: 770px) {
+  .heading {
+    font-size: 7em;
+    line-height: 1.15;
+    margin: 0;
+  }
+  .subheading {
+    font-size: 1.3em;
+    line-height: 1.15;
+    max-width: 100%;
+  }
+  .right-section {
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    bottom: 0;
+  }
+  .container {
+    flex-direction: column;
+    padding-bottom: 0vh;
+  }
+  .background .ground {
+    height: 0vh;
+  }
+  .left-section {
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    top: 0;
+  }
+  .left-section .inner-content {
+    position: relative;
+    padding: 1rem 0;
+  }
+  .svgimg {
+    padding: 0;
+  }
 }
 
 @keyframes glow {
