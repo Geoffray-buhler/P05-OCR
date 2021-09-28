@@ -18,20 +18,20 @@ class SQLiteDelete {
         $this->pdo = $pdo;
     }
 
-    public function DeleteUser($id){
+    public function DeleteUser($idUser){
         $sql = "DELETE FROM users WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
-            ":id"=> $id
+            ":id"=> $idUser
         ]);
         return 'Compte bien supprimé';
     }
 
-    public function DeleteComment($id){
+    public function DeleteComment($idComment){
         $sql = "DELETE FROM comments WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
-            ":id"=> $id
+            ":id"=> $idComment
         ]);
         return 'le commentaire a bien supprimé';
     }
