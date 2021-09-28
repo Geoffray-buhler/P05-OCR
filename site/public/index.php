@@ -26,14 +26,14 @@ function index(){
     if (strpos($url,'post')) {
         if(preg_match("/\/(\d+)$/",$url,$matches))
         {
-            $id = $matches[1];
-            return (new Controller)->article($id);
+            $idArticle = $matches[1];
+            return (new Controller)->article($idArticle);
         }
     }
 
     if (strpos($url,'delete/comment')) {
-        $id = substr($url,16);
-        return (new Controller)->Deletecomms($id);
+        $idArticle = substr($url,16);
+        return (new Controller)->Deletecomms($idArticle);
         }
 
     switch (parse_url($url)['path'])
