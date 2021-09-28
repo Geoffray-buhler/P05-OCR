@@ -15,7 +15,7 @@ body {
 }
 
 canvas {
-	z-index: 90000;
+	z-index: 9;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -204,6 +204,11 @@ nav a:hover {
 	margin-block-end: 1em;
 	margin-inline-start: 0px;
 	margin-inline-end: 0px;
+}
+
+.links{
+	position: absolute;
+	z-index: 10;
 }
 
 .flexend {
