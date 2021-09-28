@@ -56,7 +56,9 @@ function index(){
         case '/admin':
             if ($session['roles'] === 'admin') {
                 return (new Controller)->admin();
-            }else{
+            }
+            else
+            {
                 return (new Controller)->pages404();
             }
         break;
