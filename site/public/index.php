@@ -17,8 +17,8 @@ function index(){
     if (strpos($url,'post/modify')) {
         if(preg_match("/\/(\d+)$/",$url,$matches))
         {
-            $id = $matches[1];
-            return (new Controller)->modifyarticles($id);
+            $idArticle = $matches[1];
+            return (new Controller)->modifyarticles($idArticle);
         }
     }
 
@@ -56,8 +56,7 @@ function index(){
         case '/admin':
             if ($session['roles'] === 'admin') {
                 return (new Controller)->admin();
-            }else
-            {
+            }else{
                 return (new Controller)->pages404();
             }
         break;
