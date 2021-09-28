@@ -86,14 +86,14 @@ class Controller
         ]);
     }
 
-    function article($id)
+    function article($idArticle)
     {
         // load template
         $template = $this->twig->load('pages/post.html.twig');
 
         $sqlite = new SQLiteGet($this->conn);
-        $article = $sqlite->getArticle($id);
-        $comments = $sqlite->getAllCommentFromArticle($id);
+        $article = $sqlite->getArticle($idArticle);
+        $comments = $sqlite->getAllCommentFromArticle($idArticle);
         if (!empty($this->post)) {
             $cleanarray = (new Security)->cleanInput($this->post);
             $title = $cleanarray[0];
@@ -133,7 +133,9 @@ class Controller
                     for ($i=0; $i <count($allusers) ; $i++) {
                         if ($allusers[$i] === $cleanarray[0]) {
                             array_push($is_ok,0);
-                        }else{
+                        }
+                        else
+                        {
                             array_push($is_ok,1);
                         }
                     }
@@ -190,10 +192,10 @@ class Controller
                 if ($verif == true) {
                     $role = $res['type'];
                     $name = $res['login'];
-                    $id = $res['id'];
+                    $iduser = $res['id'];
                     $this->session->setSession('roles', $role);
                     $this->session->setSession('login', $name);
-                    $this->session->setSession('id', $id);
+                    $this->session->setSession('id', $iduser);
                     header("Location: /");
                 }
             }else{
