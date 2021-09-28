@@ -139,7 +139,9 @@ class Controller
                             array_push($is_ok,1);
                         }
                     }
-                }else{
+                }
+                else
+                {
                     array_push($is_ok,0);
                 }
             if (array_sum($is_ok) === 0) {
@@ -155,18 +157,26 @@ class Controller
                         //TODO mettre un message de reussite
                         $this->session->setSession('succes','Votre compte a bien etais créé');
                         header("Location: /login");
-                    }else{
+                    }
+                    else
+                    {
                         //TODO mettre un message d'erreur
                         $this->session->setSession('error','Votre compte a pas etais créé');
                         header("Location: /");
                     }
-                }else{
+                }
+                else
+                {
                     $template = $this->twig->load('pages/logon.html.twig');
                     echo $template->render(array('current'=>'logon','error'=>'vous n\'avez pas mis les deux meme mot de passe'));}
-            }else{
+            }
+            else
+            {
                 $template = $this->twig->load('pages/logon.html.twig');
                 echo  $template->render(array('current'=>'logon','error'=>'le nom de compte existe deja'));}
-        }else{
+        }
+        else
+        {
                 // set template variables
                 // render template
                 $template = $this->twig->load('pages/logon.html.twig');
@@ -198,7 +208,9 @@ class Controller
                     $this->session->setSession('id', $iduser);
                     header("Location: /");
                 }
-            }else{
+            }
+            else
+            {
                 echo "ce compte existe pas !!!";
             }
         }
@@ -267,7 +279,9 @@ class Controller
             $user = $sqget->getUserWithEmail($this->post[0]);
             if ($user) {
                 new Mail($user[0]['login'],'griffont39@alwaysdata.net',"Voici votre nom de compte : ".$user[0]['login'],"Votre nom de compte",'Nom de compte',$user[0]["email"],$template,'nomdecompte');
-            }else{
+            }
+            else
+            {
                 echo "cette adresse email existe pas !";
             }
         }
