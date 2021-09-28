@@ -153,12 +153,10 @@ class Controller
                         //TODO mettre un message de reussite
                         $this->session->setSession('succes','Votre compte a bien etais créé');
                         header("Location: /login");
-                        exit();
                     }else{
                         //TODO mettre un message d'erreur
                         $this->session->setSession('error','Votre compte a pas etais créé');
                         header("Location: /");
-                        exit();
                     }
                 }else{
                     $template = $this->twig->load('pages/logon.html.twig');
