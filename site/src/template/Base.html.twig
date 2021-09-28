@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html>
-	<head lang="fr">
+<html lang="fr">
+	<head>
 		<title>
 			{% block title %}{% endblock %}
 		</title>
@@ -20,7 +20,7 @@
 	</head>
 	<body class="is-preload">
 		<div id="particles-js" class="jumbotron ">
-				<div>
+				<div class="links">
 					{% if session.roles is empty and session.login is empty %}
 						<a href="/logon" class="{% if current == 'logon' %}white{% endif %}">Inscription</a>
 						/
@@ -39,7 +39,7 @@
 						{% endif %}
 					{% endif %}
 				</div>
-				<img class="avatar" src="/img/Griffont_Termine.png"/>
+				<img class="avatar" src="/img/Griffont_Termine.png" alt="Dessin de griffont39 avec l'armure du griffon"/>
 				<h1>BUHLER GEOFFRAY</h1>
 				<h2>Griffont39 - réinventons la roue.</h2>
 		</div>
