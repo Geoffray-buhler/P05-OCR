@@ -383,7 +383,7 @@ class Controller
         $sqlite = new SQLiteGet($this->conn);
 
         $sqlite = new SQLiteDelete($this->conn);
-        $res = $sqlite->DeleteComment($id);
+        $sqlite->DeleteComment($id);
         header("Location: /articles");
     }
 }

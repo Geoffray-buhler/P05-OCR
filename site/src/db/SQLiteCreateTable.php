@@ -51,7 +51,7 @@ class SQLiteCreateTable {
         ];
 
         // execute the sql commands to create new tables
-        foreach ($commands as $key => $command) {
+        foreach ($commands as $command) {
             $this->pdo->exec($command);
         }
     }

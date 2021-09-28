@@ -11,7 +11,7 @@ class Security
     {
         $filtered = [];
         if (!empty($enter)) {
-            foreach ($enter as $key => $value) {
+            foreach ($enter as $value) {
                 array_push($filtered, htmlspecialchars($value));
             }
         }
