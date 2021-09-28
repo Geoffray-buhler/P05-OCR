@@ -379,11 +379,8 @@ class Controller
     }
 
     function Deletecomms($id){
-        // load template
-        $template = $this->twig->load('pages/articles.html.twig');
 
         $sqlite = new SQLiteGet($this->conn);
-        $articles = $sqlite->getAllArticles();
 
         $sqlite = new SQLiteDelete($this->conn);
         $res = $sqlite->DeleteComment($id);
