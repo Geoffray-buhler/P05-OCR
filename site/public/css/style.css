@@ -35,7 +35,7 @@ a {
 }
 
 .d-none {
-	display: none!important;
+	display: none;
 }
 
 .icon {
@@ -49,8 +49,8 @@ a {
 }
 
 .menuadd {
-	width: 100px !important;
-	padding: 1rem !important;
+	width: 100px ;
+	padding: 1rem ;
 }
 
 .avatar {
@@ -110,7 +110,7 @@ a {
 }
 
 .white {
-	color: #ffffff!important;
+	color: #ffffff;
 }
 
 nav {
@@ -207,20 +207,20 @@ nav a:hover {
 }
 
 .flexend {
-	align-self: flex-end!important;
+	align-self: flex-end;
 }
 
 .errorbtn {
-	background-color: #ff000025!important;
-	color: #ff0000!important;
-	border: solid 1px #ff0000!important;
+	background-color: #ff000025;
+	color: #ff0000;
+	border: solid 1px #ff0000;
 	transition: 1s;
 }
 
 .errorbtn:hover {
-	background-color: #ff0000!important;
-	color: #ff000025!important;
-	border: solid 1px #ff000025!important;
+	background-color: #ff0000;
+	color: #ff000025;
+	border: solid 1px #ff000025;
 	transition: 1s;
 }
 
