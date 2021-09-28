@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
-/*Variables*/
+/* Variables */
 .left-section .inner-content {
   position: absolute;
   top: 50%;
@@ -111,6 +111,7 @@ body {
   stroke-width: 1px;
   fill: #5b3e2B;
 }
+
 .svgimg .bottom-bench path:nth-child(1) {
   fill: #432d20;
 }
