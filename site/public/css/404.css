@@ -172,7 +172,7 @@ body {
   0% {
     text-shadow: 0 0 1rem #fefefe;
   }
-  
+
   50% {
     text-shadow: 0 0 1.85rem #ededed;
   }
@@ -181,4 +181,3 @@ body {
     text-shadow: 0 0 1rem #fefefe;
   }
 }
-
