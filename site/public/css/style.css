@@ -6,20 +6,20 @@
 }
 
 body {
-  padding: 2rem 0 2rem 0;
-  width: 100%;
-  background-color: #0e2336;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	padding: 2rem 0 2rem 0;
+	width: 100%;
+	background-color: #0e2336;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 canvas {
 	z-index: 9;
 	position: absolute;
 	top: 0;
-  left: 0;
+	left: 0;
 }
 
 h1,
@@ -27,7 +27,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: 'AbsoluteEmpire';
+	font-family: 'AbsoluteEmpire';
 }
 
 a {
@@ -46,7 +46,7 @@ a {
 .main {
 	width: 75%;
 	display: flex;
-  flex-direction: column;
+	flex-direction: column;
 }
 
 .menuadd {
@@ -55,30 +55,30 @@ a {
 }
 
 .avatar {
-  animation: float 6s ease-in-out infinite;
+	animation: float 6s ease-in-out infinite;
 }
 
 .jumbotron {
-  overflow: hidden;
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 68vh;
-  color: #ffffff80;
-  width: 75%;
-  background: rgba( 162, 162, 162, 0.15);
-  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
-  backdrop-filter: blur( 11.0px);
-  -webkit-backdrop-filter: blur( 11.0px);
-  border-radius: 10px 10px 0 0;
-  border: 1px solid rgba( 255, 255, 255, 0.18);
+	overflow: hidden;
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 68vh;
+	color: #ffffff80;
+	width: 75%;
+	background: rgba(162, 162, 162, 0.15);
+	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+	backdrop-filter: blur(11.0px);
+	-webkit-backdrop-filter: blur(11.0px);
+	border-radius: 10px 10px 0 0;
+	border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .jumbotron img {
-  height: 300px;
-  width: 210px;
+	height: 300px;
+	width: 210px;
 }
 
 .jumbotron div {
@@ -145,15 +145,15 @@ nav {
 }
 
 nav a {
-  transition: 1s;
+	transition: 1s;
 }
 
 nav:after {
-  filter: blur(50px);
+	filter: blur(50px);
 }
 
 .btn-error {
-  background-color: #ff000050;
+	background-color: #ff000050;
 	border: solid 1px #ff0000;
 	padding: 5px;
 	border-radius: 10px;
@@ -170,14 +170,14 @@ nav:after {
 
 .btn-blue {
 	background-color: #4455ff50;
-  border: solid 1px #4455ff;
+	border: solid 1px #4455ff;
 	padding: 5px;
 	border-radius: 10px;
 	transition: 1s;
 }
 
 .btn-blue:hover {
-  background-color: #4455ff;
+	background-color: #4455ff;
 	border: solid 1px #4455ff50;
 	padding: 5px;
 	border-radius: 10px;
@@ -185,7 +185,7 @@ nav:after {
 }
 
 .btn-warning {
-  background-color: #ffc44450;
+	background-color: #ffc44450;
 	border: solid 1px #ffae44;
 	padding: 5px;
 	border-radius: 10px;
@@ -194,7 +194,7 @@ nav:after {
 
 .btn-warning:hover {
 	background-color: #ffae44;
-  border: solid 1px #ffc44450;
+	border: solid 1px #ffc44450;
 	padding: 5px;
 	border-radius: 10px;
 	transition: 1s;
@@ -207,7 +207,7 @@ nav:after {
 	margin-inline-end: 0px;
 }
 
-.links{
+.links {
 	position: absolute;
 	z-index: 10;
 }
@@ -242,7 +242,7 @@ nav:after {
 	border-radius: 1rem;
 	padding: 5px;
 	border: none;
-  height: 200px;
+	height: 200px;
 	margin: 1rem;
 	box-shadow: 0px 0px 9px 5px rgba(0, 0, 0, 0.1);
 }
@@ -305,15 +305,15 @@ nav:after {
 }
 
 .bubble-text {
-  background: #139ee0;
+	background: #139ee0;
 	color: #fff;
-  padding: 7px 15px;
+	padding: 7px 15px;
 	border-radius: 3px;
 	width: 350px;
 }
 
 .bubble-text::after {
-  content: "";
+	content: "";
 	border-left: 20px solid transparent;
 	border-right: 20px solid transparent;
 	border-top: 20px solid #139ee0;
@@ -327,7 +327,7 @@ nav:after {
 }
 
 .btnprimary {
-  background-color: #0e2336;
+	background-color: #0e2336;
 	border-radius: 3px;
 	border: none;
 	color: #45f;
@@ -339,7 +339,7 @@ nav:after {
 
 .btnprimary:hover {
 	background-color: #3d94e0;
-  color: #0f133a;
+	color: #0f133a;
 	transition: 0.5s;
 }
 
@@ -379,38 +379,44 @@ nav:after {
 
 @media screen and (max-width: 580px) {
 	.normale {
-	display: none;
+		display: none;
 	}
+
 	.btn-hamburger {
-	margin-left: 1rem;
-	background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png');
-	background-size: cover;
-	height: 50px;
-	width: 50px;
-  }
+		margin-left: 1rem;
+		background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png');
+		background-size: cover;
+		height: 50px;
+		width: 50px;
+	}
+
 	.d-flex {
-	display: flex;
-	flex-direction: column;
+		display: flex;
+		flex-direction: column;
 	}
+
 	.avatar {
-	display: none;
+		display: none;
 	}
+
 	.jumbotron {
-	text-align: center;
+		text-align: center;
 	}
 }
 
 @keyframes float {
 	0% {
-	filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.6));
-	transform: translatey(0px);
+		filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.6));
+		transform: translatey(0px);
 	}
+
 	50% {
-	filter: drop-shadow(0 30px 15px rgba(0, 0, 0, 0.1));
-	transform: translatey(-20px);
+		filter: drop-shadow(0 30px 15px rgba(0, 0, 0, 0.1));
+		transform: translatey(-20px);
 	}
+
 	100% {
-	filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.6));
-	transform: translatey(0px);
+		filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.6));
+		transform: translatey(0px);
 	}
 }
