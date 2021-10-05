@@ -4,7 +4,7 @@ use App\Debug;
 use Controller\Controller;
 use Controller\SessionManager;
 
-require dirname(__DIR__).'/vendor/autoload.php';
+require_once dirname(__DIR__).'/vendor/autoload.php';
 
 function index(){
 

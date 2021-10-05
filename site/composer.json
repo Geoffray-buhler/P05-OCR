@@ -5,7 +5,8 @@
             "Controller\\": "./src/controllers",
             "Model\\": "./src/template",
             "Bdd\\": "./src/db",
-            "Utils\\": "./src/utils"
+            "Utils\\": "./src/utils",
+            "Vendor\\":"./vendor"
         }
     },
     "require": {
