@@ -366,11 +366,11 @@ class Controller
         ));
     }
 
-    function modifyarticles($id)
+    function modifyarticles($idArticle)
     {
         $infos_user = $this->session->getSession();
         $sqlite = new SQLiteGet($this->conn);
-        $article = $sqlite->getArticle($id);
+        $article = $sqlite->getArticle($idArticle);
         if (isset($this->post)) {
             if(isset($_FILES['file'])){
                 $tmpName = $_FILES['file']['tmp_name'];
@@ -381,7 +381,7 @@ class Controller
             $articleBody = $this->post[1];
             $userId = $this->session->session['id'];
             $sqlite = new SQLiteSet($this->conn);
-            $sqlite->updateArticles($articleTitle,$articleBody,$userId,$name,$id);
+            $sqlite->updateArticles($articleTitle,$articleBody,$userId,$name,$idArticle);
             $this->session->setSession('succes','Votre article est bien poster');
             header("Location: /");
         }
@@ -394,12 +394,12 @@ class Controller
         ));
     }
 
-    function Deletecomms($id){
+    function Deletecomms($idComms){
 
         $sqlite = new SQLiteGet($this->conn);
 
         $sqlite = new SQLiteDelete($this->conn);
-        $sqlite->DeleteComment($id);
+        $sqlite->DeleteComment($idComms);
         header("Location: /articles");
     }
 }
