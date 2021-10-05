@@ -18,7 +18,7 @@ canvas {
 	z-index: 9;
 	position: absolute;
 	top: 0;
-left: 0;
+  left: 0;
 }
 
 h1,
@@ -45,7 +45,7 @@ a {
 .main {
 	width: 75%;
 	display: flex;
-flex-direction: column;
+  flex-direction: column;
 }
 
 .menuadd {
@@ -54,7 +54,7 @@ flex-direction: column;
 }
 
 .avatar {
-animation: float 6s ease-in-out infinite;
+  animation: float 6s ease-in-out infinite;
 }
 
 .jumbotron {
@@ -64,7 +64,7 @@ animation: float 6s ease-in-out infinite;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-height: 68vh;
+  height: 68vh;
 	color: #ffffff80;
 	width: 75%;
 	background: rgba( 162, 162, 162, 0.15);
@@ -72,7 +72,7 @@ height: 68vh;
 	backdrop-filter: blur( 11.0px);
 	-webkit-backdrop-filter: blur( 11.0px);
 	border-radius: 10px 10px 0 0;
-border: 1px solid rgba( 255, 255, 255, 0.18);
+  border: 1px solid rgba( 255, 255, 255, 0.18);
 }
 
 .jumbotron img {
@@ -138,7 +138,7 @@ nav {
 }
 
 nav a {
-transition: 1s;
+  transition: 1s;
 }
 
 nav:after {
@@ -152,7 +152,7 @@ nav a:hover {
 }
 
 .btn-error {
-background-color: #ff000050;
+  background-color: #ff000050;
 	border: solid 1px #ff0000;
 	padding: 5px;
 	border-radius: 10px;
@@ -169,14 +169,14 @@ background-color: #ff000050;
 
 .btn-blue {
 	background-color: #4455ff50;
-border: solid 1px #4455ff;
+  border: solid 1px #4455ff;
 	padding: 5px;
 	border-radius: 10px;
 	transition: 1s;
 }
 
 .btn-blue:hover {
-background-color: #4455ff;
+  background-color: #4455ff;
 	border: solid 1px #4455ff50;
 	padding: 5px;
 	border-radius: 10px;
@@ -184,7 +184,7 @@ background-color: #4455ff;
 }
 
 .btn-warning {
-background-color: #ffc44450;
+  background-color: #ffc44450;
 	border: solid 1px #ffae44;
 	padding: 5px;
 	border-radius: 10px;
@@ -304,15 +304,15 @@ background-color: #ffc44450;
 }
 
 .bubble-text {
-background: #139ee0;
+  background: #139ee0;
 	color: #fff;
-padding: 7px 15px;
+  padding: 7px 15px;
 	border-radius: 3px;
 	width: 350px;
 }
 
 .bubble-text::after {
-content: "";
+  content: "";
 	border-left: 20px solid transparent;
 	border-right: 20px solid transparent;
 	border-top: 20px solid #139ee0;
@@ -338,7 +338,7 @@ content: "";
 
 .btnprimary:hover {
 	background-color: #3d94e0;
-color: #0f133a;
+  color: #0f133a;
 	transition: 0.5s;
 }
 
