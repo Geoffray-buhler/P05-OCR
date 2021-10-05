@@ -378,38 +378,38 @@ nav a:hover {
 
 @media screen and (max-width: 580px) {
 	.normale {
-		display: none;
+	display: none;
 	}
 	.btn-hamburger {
-		margin-left: 1rem;
-		background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png');
-		background-size: cover;
-		height: 50px;
-		width: 50px;
-	}
+	margin-left: 1rem;
+	background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png');
+	background-size: cover;
+	height: 50px;
+	width: 50px;
+  }
 	.d-flex {
-		display: flex;
-		flex-direction: column;
+	display: flex;
+	flex-direction: column;
 	}
 	.avatar {
-		display: none;
+	display: none;
 	}
 	.jumbotron {
-		text-align: center;
+	text-align: center;
 	}
 }
 
 @keyframes float {
 	0% {
-		filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.6));
-		transform: translatey(0px);
+	filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.6));
+	transform: translatey(0px);
 	}
 	50% {
-		filter: drop-shadow(0 30px 15px rgba(0, 0, 0, 0.1));
-		transform: translatey(-20px);
+	filter: drop-shadow(0 30px 15px rgba(0, 0, 0, 0.1));
+	transform: translatey(-20px);
 	}
 	100% {
-		filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.6));
-		transform: translatey(0px);
+	filter: drop-shadow(0 15px 5px rgba(0, 0, 0, 0.6));
+	transform: translatey(0px);
 	}
 }
