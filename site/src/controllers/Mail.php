@@ -29,6 +29,11 @@ class Mail
 
         $mail = new PHPMailer(true);
 
+        $msg = filter_var($msg, FILTER_DEFAULT);
+        $email = filter_var($email, FILTER_DEFAULT);
+        $AdressToSend = filter_var($AdressToSend, FILTER_DEFAULT);
+        $raisonEmail = filter_var($raisonEmail, FILTER_DEFAULT);
+
         try {
             //Server settings
             //$mail->SMTPDebug = SMTP::DEBUG_SERVER;                    //Enable verbose debug output
@@ -60,7 +65,7 @@ class Mail
             $mail->Body = $template->render(['name'=>$name,'msg'=>$msg,'acctu'=>$acctu]);
 
             $mail->send();
-            echo 'Message has been sent';
+            echo "Message has been sent";
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }

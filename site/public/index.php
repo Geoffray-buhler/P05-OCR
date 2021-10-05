@@ -39,7 +39,7 @@ function index(){
     switch (parse_url($url)['path'])
     {
         case '/':
-            (new Controller)->home();
+            return (new Controller)->home();
         break;
         case '/logon':
             return (new Controller)->register();

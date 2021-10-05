@@ -62,12 +62,14 @@ class Controller
         $template = $this->twig->load('pages/index.html.twig');
 
         if(!empty($this->post[0]) && !empty($this->post[1]) && !empty($this->post[2]) && !empty($this->post[3])){
-            $this->post["name"] = $this->post[0]; 
-            $this->post["subject"] = $this->post[1];  
-            $this->post["email"] = $this->post[2]; 
-            $this->post["body"] = $this->post[3];
+            $this->post["name"] = filter_var($this->post[0],FILTER_DEFAULT); 
+            $this->post["subject"] = filter_var($this->post[1],FILTER_DEFAULT);  
+            $this->post["email"] = $this->post[2];
+            $this->post["body"] = filter_var($this->post[3],FILTER_DEFAULT);
             if (filter_var($this->post['email'], FILTER_VALIDATE_EMAIL)) {
                 new Mail($this->post["name"],$this->post["email"],$this->post["body"],$this->post["subject"],'Contact blog !','griffont.rf@gmail.com',$template,'contact');
+            }else{
+                echo "Votre email n'est pas valide";
             };
         };
             echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession()]);
