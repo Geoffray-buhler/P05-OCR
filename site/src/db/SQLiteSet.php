@@ -36,7 +36,7 @@ class SQLiteSet {
         /**
     * set an article in BDD
     */
-    public function updateArticles($title,$body,$users_id,$name,$id) {
+    public function updateArticles($title,$body,$users_id,$name,$idArticles) {
         $sql = 'UPDATE articles SET title=:title,body=:body,filename=:fileName,users_id=:users_id WHERE id=:id';
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
@@ -44,7 +44,7 @@ class SQLiteSet {
             ':body'=> $body,
             ':users_id'=>$users_id,
             ':fileName'=>$name,
-            ':id'=>$id,
+            ':id'=>$idArticles,
         ]);
         return $this->pdo->lastInsertId();
     }
@@ -81,11 +81,11 @@ class SQLiteSet {
     /**
     * update an user in BDD
     */
-    public function updateUser($id,$mdp) {
+    public function updateUser($idUser,$mdp) {
         $sql = 'UPDATE users SET password=:mdp WHERE id=:id' ;
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
-            ':id'=> $id,
+            ':id'=> $idUser,
             ':mdp'=> $mdp,
         ]);
         return $this->pdo->lastInsertId();
