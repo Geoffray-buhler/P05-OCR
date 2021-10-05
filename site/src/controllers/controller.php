@@ -31,7 +31,7 @@ class Controller
 
     function __construct()
     {
-        $this->session = $_SESSION;
+        $this->session = filter_var($_SESSION,FILTER_DEFAULT);
 
         // le dossier ou on trouve les templates
         $loader = new FilesystemLoader('../src/template');
@@ -68,9 +68,9 @@ class Controller
             $this->post["body"] = filter_var($this->post[3],FILTER_DEFAULT);
             if (filter_var($this->post['email'], FILTER_VALIDATE_EMAIL)) {
                 new Mail($this->post["name"],$this->post["email"],$this->post["body"],$this->post["subject"],'Contact blog !','griffont.rf@gmail.com',$template,'contact');
-            }else{
-                echo "Votre email n'est pas valide";
-            };
+                return;
+            }
+            echo "Votre email n'est pas valide";
         };
             echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession()]);
     }
