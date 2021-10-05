@@ -91,6 +91,12 @@ a {
 	color: #ffffff80;
 }
 
+nav a:hover {
+	color: rgb(0, 0, 0);
+	background-color: #ffffff80;
+	transition: 1s;
+}
+
 .jumbotron a:hover {
 	color: #ffffff;
 }
@@ -144,12 +150,6 @@ nav a {
 
 nav:after {
   filter: blur(50px);
-}
-
-nav a:hover {
-	color: rgb(0, 0, 0);
-	background-color: #ffffff80;
-	transition: 1s;
 }
 
 .btn-error {
@@ -327,7 +327,7 @@ nav a:hover {
 }
 
 .btnprimary {
-	background-color: #0e2336;
+background-color: #0e2336;
 	border-radius: 3px;
 	border: none;
 	color: #45f;
