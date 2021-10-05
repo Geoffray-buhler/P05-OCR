@@ -135,17 +135,13 @@ class Controller
                     for ($i=0; $i <count($allusers) ; $i++) {
                         if ($allusers[$i] === $cleanarray[0]) {
                             array_push($is_ok,0);
+                            return;
                         }
-                        else
-                        {
-                            array_push($is_ok,1);
-                        }
+                        array_push($is_ok,1);
                     }
+                    return;
                 }
-                else
-                {
-                    array_push($is_ok,0);
-                }
+                array_push($is_ok,0);
             if (array_sum($is_ok) === 0) {
                 $password= $cleanarray[2];
                 $confPassword = $cleanarray[3];
