@@ -193,7 +193,7 @@ nav a:hover {
 
 .btn-warning:hover {
 	background-color: #ffae44;
-border: solid 1px #ffc44450;
+  border: solid 1px #ffc44450;
 	padding: 5px;
 	border-radius: 10px;
 	transition: 1s;
