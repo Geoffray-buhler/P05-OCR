@@ -43,6 +43,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
 }
+
 .container div {
   position: relative;
   margin: 0 auto;
