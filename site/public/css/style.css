@@ -241,7 +241,7 @@ nav a:hover {
 	border-radius: 1rem;
 	padding: 5px;
 	border: none;
-height: 200px;
+  height: 200px;
 	margin: 1rem;
 	box-shadow: 0px 0px 9px 5px rgba(0, 0, 0, 0.1);
 }
