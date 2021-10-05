@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+
 /* Variables */
 .left-section .inner-content {
   position: absolute;
@@ -11,8 +12,7 @@
 }
 
 html,
-body
-{
+body{
   margin: 0;
   padding: 0;
 }
@@ -29,18 +29,21 @@ body {
   height: 100%;
   background: linear-gradient(#0c0e10, #446182);
 }
-.background .ground {
+
+.background 
+.ground {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 25vh;
   background: #0c0e10;
 }
+
 .container {
   flex-direction: column;
   justify-content: space-around;
 }
-.container div{
+.container div {
   position: relative;
   margin: 0 auto;
   width: 85%;
@@ -48,17 +51,18 @@ body {
   padding-bottom: 25vh;
   display: flex;
 }
-.container span{
-    position: relative;
-    margin: 0 auto;
-    width: 85%;
-    display: flex;
+.container span {
+  position: relative;
+  margin: 0 auto;
+  width: 85%;
+  display: flex;
 }
-.column{
+.column {
   display: flex;
   flex-direction: column;
 }
-.night{
+
+.night {
   text-align: center;
   text-decoration: none;
   color: #ffffff;
@@ -69,7 +73,9 @@ body {
   padding: 0;
   text-shadow: 0 0 1rem #fefefe;
 }
-.left-section, .right-section {
+
+.left-section,
+.right-section {
   position: relative;
 }
 .left-section {
