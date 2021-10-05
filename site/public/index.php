@@ -57,10 +57,7 @@ function index(){
             if ($session['roles'] === 'admin') {
                 return (new Controller)->admin();
             }
-            else
-            {
-                return (new Controller)->pages404();
-            }
+            return (new Controller)->pages404();
         break;
         case '/profil/modify':
             return (new Controller)->modify();
@@ -75,10 +72,7 @@ function index(){
             if ($session['roles'] === 'admin') {
                 return (new Controller)->newarticles();
             }
-            else
-            {
-                return (new Controller)->pages404();
-            }
+            return (new Controller)->pages404();
         break;
         case '/lost/password':
             return (new Controller)->PasswordLost();
