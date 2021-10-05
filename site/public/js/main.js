@@ -7,4 +7,4 @@ btn.addEventListener("click",(e) => {
   }else{
       div.classList.add("d-none");
   }
-})
+});
