@@ -11,10 +11,10 @@ class Debug
                 var_dump($value);
                 echo '</pre>';
             }
-        }else{
-            echo '<pre style="background-color: #000000; color:#ffff10; padding:1rem;">';
-            var_dump($enter);
-            echo '</pre>';
+        return;
         }
+        echo '<pre style="background-color: #000000; color:#ffff10; padding:1rem;">';
+        var_dump($enter);
+        echo '</pre>';
     }
 }

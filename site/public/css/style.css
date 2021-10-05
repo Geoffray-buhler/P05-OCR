@@ -26,7 +26,7 @@ h2,
 h3,
 h4,
 h5 {
-	font-family: 'AbsoluteEmpire';
+  font-family: 'AbsoluteEmpire';
 }
 
 a {
@@ -193,7 +193,7 @@ nav a:hover {
 
 .btn-warning:hover {
 	background-color: #ffae44;
-	border: solid 1px #ffc44450;
+  border: solid 1px #ffc44450;
 	padding: 5px;
 	border-radius: 10px;
 	transition: 1s;
@@ -241,7 +241,7 @@ nav a:hover {
 	border-radius: 1rem;
 	padding: 5px;
 	border: none;
-	height: 200px;
+  height: 200px;
 	margin: 1rem;
 	box-shadow: 0px 0px 9px 5px rgba(0, 0, 0, 0.1);
 }
