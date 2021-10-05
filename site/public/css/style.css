@@ -98,12 +98,12 @@ transition: 1s;
 }
 
 .jumbotron a:hover {
-color: #ffffff;
+color: #fff;
 }
 
 .content {
 padding: 1rem;
-background-color: #ffffff;
+background-color: #fff;
 }
 
 .center {
@@ -117,7 +117,7 @@ text-align: left;
 }
 
 .white {
-color: #ffffff;
+color: #fff;
 }
 
 nav {
@@ -132,7 +132,7 @@ background: linear-gradient(0deg, rgb(138, 138, 138), #e9e9e9);
 }
 
 .active {
-background-color: #ffffff;
+background-color: #fff;
 color: #0e2336;
 }
 
