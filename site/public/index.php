@@ -11,7 +11,7 @@ function index(){
     $session = new SessionManager();
     $session = $session->getSession();
 
-    $url = filter_input($_SERVER['REQUEST_URI'],FILTER_DEFAULT);
+    $url = $_SERVER['REQUEST_URI'];
 
     // function router pour la modification des articles 
     if (strpos($url,'post/modify')) {
@@ -36,7 +36,7 @@ function index(){
         return (new Controller)->Deletecomms($idArticle);
         }
 
-    switch (parse_url($url)['path'])
+    switch ($url)
     {
         case '/':
             return (new Controller)->home();
