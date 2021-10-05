@@ -1,0 +1,24 @@
+{% if acctu == 'nomdecompte' %}
+<div style="background-color:#dedede;padding:1rem;">
+    <h2>Cher: {{name}}</h2>
+    <br/>
+    <p>Vous-venez de faire la demande de nom de compte</p>
+    <div style="background-color:red;padding:1rem;">{{msg}}</div>
+</div>
+{% endif %}
+{% if acctu == 'pswlost' %}
+<div style="background-color:#dedede;padding:1rem;">
+    <h2>{{name}}</h2>
+    <br/>
+    <p>Vous-venez de faire la demande de changement de mot de passe</p>
+    <div style="background-color:red;padding:1rem;">{{msg}}</div>
+</div>
+{% endif %}
+{% if acctu == 'contact' %}
+<div style="background-color:#dedede;padding:1rem;">
+    <h2>{{name}}</h2>
+    <br/>
+    <p>Viens de prendre contact avec vous</p>
+    <div style="background-color:red;padding:1rem;">{{msg}}</div>
+</div>
+{% endif %}

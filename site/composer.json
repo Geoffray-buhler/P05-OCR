@@ -1,0 +1,16 @@
+{
+    "autoload": {
+        "psr-4": {
+            "App\\": "./src",
+            "Controller\\": "./src/controllers",
+            "Model\\": "./src/template",
+            "Bdd\\": "./src/db",
+            "Utils\\": "./src/utils",
+            "Vendor\\":"./vendor"
+        }
+    },
+    "require": {
+        "twig/twig": "^3.3",
+        "phpmailer/phpmailer": "^6.5"
+    }
+}

@@ -1,0 +1,18 @@
+{% extends "/Base.html.twig" %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<h1>Nom de compte perdu</h1>
+{{ parent() }}
+<form action="#" method="POST">
+    <div class="d-flex m-1">
+        <input class="ml-1 mr-1 input" name="email" type="email" placeholder="Adresse Email">
+    </div>
+    <input type="submit">
+</form>
+{% endblock %}

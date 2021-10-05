@@ -1,0 +1,23 @@
+{% extends "/Base.html.twig" %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<h1>Connexion</h1>
+{{ parent() }}
+<form action="#" method="POST">
+    <div class="d-flex m-1">
+        <input class="input" type="text" name="login" class="ml-1" placeholder="Login">
+        <input class="input" type="password" name="password" class="ml-1" placeholder="Mot de passe">
+    </div>
+    <input class="btnprimary" type="submit" value="Connexion">
+</form>
+<div class="d-flex mt-1">
+<a class="link" href="/lost/password">Mot de passe perdu</a>
+<a class="link ml-1" href="/lost/login">Nom de compte perdu</a>
+</div>
+{% endblock %}
