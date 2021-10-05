@@ -8,7 +8,7 @@
     {{ parent() }}
     <div class="articleMain">
     {% if article[0].fileName is defined %}
-        <img src="/uploads/{{article[0].fileName}}" alt="image du post {{article[0].title}}"/>
+        <img class="imgpost" src="/uploads/{{article[0].fileName}}" alt="image du post {{article[0].title}}"/>
     {% endif %}
     <p class="begin">{{ article[0].body }}</p>
     </div>
