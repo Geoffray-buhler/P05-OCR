@@ -11,7 +11,7 @@ function index(){
     $session = new SessionManager();
     $session = $session->getSession();
 
-    $url = $_SERVER['REQUEST_URI'];
+    $url = filter_input($_SERVER['REQUEST_URI'],FILTER_DEFAULT);
 
     // function router pour la modification des articles 
     if (strpos($url,'post/modify')) {
