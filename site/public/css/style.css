@@ -158,14 +158,14 @@ nav:after {
 
 .btn-error {
   background-color: #ff000050;
-	border: solid 1px #ff0000;
+	border: solid 1px #f00;
 	padding: 5px;
 	border-radius: 10px;
 	transition: 1s;
 }
 
 .btn-error:hover {
-	background-color: #ff0000;
+	background-color: #f00;
 	border: solid 1px #ff000050;
 	padding: 5px;
 	border-radius: 10px;
@@ -174,14 +174,14 @@ nav:after {
 
 .btn-blue {
 	background-color: #4455ff50;
-  border: solid 1px #4455ff;
+  border: solid 1px #45f;
 	padding: 5px;
 	border-radius: 10px;
 	transition: 1s;
 }
 
 .btn-blue:hover {
-  background-color: #4455ff;
+  background-color: #45f;
 	border: solid 1px #4455ff50;
 	padding: 5px;
 	border-radius: 10px;
@@ -223,12 +223,12 @@ nav:after {
 .errorbtn {
 	background-color: #ff000025;
 	color: #ff0000;
-	border: solid 1px #ff0000;
+	border: solid 1px #f00;
 	transition: 1s;
 }
 
 .errorbtn:hover {
-	background-color: #ff0000;
+	background-color: #f00;
 	color: #ff000025;
 	border: solid 1px #ff000025;
 	transition: 1s;

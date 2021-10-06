@@ -152,13 +152,11 @@ class Controller
                     $sqlite = new SQLiteSet($this->conn);
                     $res = $sqlite->setUser($login,$cryptedPassword,$email);
                     if($res > 0){
-                        //TODO mettre un message de reussite
                         $this->session->setSession('succes','Votre compte a bien etais créé');
                         header("Location: /login");
                     }
                     else
                     {
-                        //TODO mettre un message d'erreur
                         $this->session->setSession('error','Votre compte a pas etais créé');
                         header("Location: /");
                     }
