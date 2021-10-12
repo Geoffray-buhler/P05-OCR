@@ -10,7 +10,6 @@ class SessionManager
     public $session = [];
     public $user_info;
 
-    //TODO Set cookie et Sessionmanager
     function __construct()
     {
         if (session_status() === PHP_SESSION_NONE) {
