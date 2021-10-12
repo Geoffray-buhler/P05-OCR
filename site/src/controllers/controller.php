@@ -20,6 +20,7 @@ use Utils\PswGen;
 // require dirname(__DIR__).'\..\vendor\autoload.php';
 
 //TODO Screen reader aria-label= sur les <a></a> + label sur input / image access
+//TODO Capcha pour les mails
 
 class Controller
 {  

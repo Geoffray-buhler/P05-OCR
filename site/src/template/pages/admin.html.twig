@@ -10,10 +10,10 @@
 <h1>Administration</h1>
 {{ parent() }}
 <h2>Gestion des posts</h2>
-<a href="/post/create" class="btn-blue">Crée un nouvel article</a>
+<a aria-label="Crée un nouvel article" href="/post/create" class="btn-blue">Crée un nouvel article</a>
 <h3>Modifiers les articles</h3>
     {% for post in posts %}
-        <a href="/post/modify/{{post.id}}" class="btn-warning">{{post.title}}</a>
+        <a aria-label="Modifier un article" href="/post/modify/{{post.id}}" class="btn-warning">{{post.title}}</a>
     {% endfor %}
 <h2>Gestion des utilisateurs</h2>
 <table>
