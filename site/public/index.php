@@ -13,6 +13,8 @@ function index(){
 
     $url = $_SERVER['REQUEST_URI'];
 
+    $dictionnaire = [];
+
     // function router pour la modification des articles 
     if (strpos($url,'post/modify')) {
         if(preg_match("/\/(\d+)$/",$url,$matches))
