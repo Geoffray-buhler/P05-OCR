@@ -2,8 +2,6 @@
 
 namespace Bdd;
 
-use App\Debug;
-
 /**
  * SQLite connnection
  */

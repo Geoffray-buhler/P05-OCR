@@ -2,8 +2,6 @@
 
 namespace Bdd;
 
-use App\Debug;
-
 class SQLiteDelete {
     /**
     * PDO object

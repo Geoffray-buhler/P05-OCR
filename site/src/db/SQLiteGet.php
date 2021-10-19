@@ -3,7 +3,6 @@
 namespace Bdd;
 
 use PDO;
-use App\Debug;
 
 class SQLiteGet {
         /**

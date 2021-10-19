@@ -2,8 +2,6 @@
 
 namespace Bdd;
 
-use App\Debug;
-
 class SQLiteCreateTable {
     /**
      * PDO object
