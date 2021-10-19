@@ -62,17 +62,36 @@ class Controller
         // load template
         $template = $this->twig->load('pages/index.html.twig');
 
-        if(!empty($this->post[0]) && !empty($this->post[1]) && !empty($this->post[2]) && !empty($this->post[3])){
-            $this->post["name"] = filter_var($this->post[0],FILTER_DEFAULT); 
-            $this->post["subject"] = filter_var($this->post[1],FILTER_DEFAULT);  
-            $this->post["email"] = $this->post[2];
-            $this->post["body"] = filter_var($this->post[3],FILTER_DEFAULT);
-            if (filter_var($this->post['email'], FILTER_VALIDATE_EMAIL)) {
-                new Mail($this->post["name"],$this->post["email"],$this->post["body"],$this->post["subject"],'Contact blog !','griffont.rf@gmail.com',$template,'contact');
-                return;
-            }
-            echo "Votre email n'est pas valide";
-        };
+        $data = array( 
+            'secret' => "my-secret (devrait commencer par 0x..)", 
+            'response' => $_POST['h-captcha-response'] 
+        );
+
+        $verify = curl_init(); 
+        curl_setopt($verify, CURLOPT_URL, " https://hcaptcha.com/siteverify "); 
+        curl_setopt($verify, CURLOPT_POST, true); 
+        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data)); 
+        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true); 
+        $response = curl_exec($verify);
+        // var_dump($response);
+        $responseData = json_decode($response); 
+        if($responseData->success) { 
+            if(!empty($this->post[0]) && !empty($this->post[1]) && !empty($this->post[2]) && !empty($this->post[3])){
+
+                $this->post["name"] = filter_var($this->post[0],FILTER_DEFAULT); 
+                $this->post["subject"] = filter_var($this->post[1],FILTER_DEFAULT);  
+                $this->post["email"] = $this->post[2];
+                $this->post["body"] = filter_var($this->post[3],FILTER_DEFAULT);
+                if (filter_var($this->post['email'], FILTER_VALIDATE_EMAIL)) {
+                    new Mail($this->post["name"],$this->post["email"],$this->post["body"],$this->post["subject"],'Contact blog !','griffont.rf@gmail.com',$template,'contact');
+                    return;
+                }
+                echo "Votre email n'est pas valide";
+            };
+        } 
+        else { 
+            echo $template->render(['current'=>'home' ,'error'=>'Erreur captcha', 'session'=>$this->session->getSession()]);
+        }
             echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession()]);
     }
 

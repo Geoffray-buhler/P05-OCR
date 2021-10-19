@@ -1,3 +1,7 @@
 Sur le dossier docs il y a tous les documents pour le site
 
-Sur le dossier site il y a le site (blog) en php 
+Sur le dossier site il y a le site (blog) en php
+Pour lancer le serveur
+
+cd site
+php -S localhost:8080

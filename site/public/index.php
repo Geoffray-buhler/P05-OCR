@@ -1,6 +1,5 @@
 <?php
 
-use App\Debug;
 use Controller\Controller;
 use Controller\SessionManager;
 
@@ -13,14 +12,29 @@ function index(){
 
     $url = $_SERVER['REQUEST_URI'];
 
-    $dictionnaire = [];
+    $dictionnaire = [
+        "/home" =>  "home",
+        "/"=> "home",
+        "/logon" =>  "register",
+        "/login" =>  "login",
+        "/articles" =>  "articles",
+        "/admin" =>  "admin",
+        "/profil/modify" => "modify",
+        "/profil" =>  "profil",
+        "/deconnexion" =>  "deconnexion",
+        "/post/create" =>  "newarticles",
+        "/lost/password" =>  "PasswordLost",
+        "/lost/login"=> "LoginLost",
+    ];
+
+    $control = new Controller;
 
     // function router pour la modification des articles 
     if (strpos($url,'post/modify')) {
         if(preg_match("/\/(\d+)$/",$url,$matches))
         {
             $idArticle = $matches[1];
-            return (new Controller)->modifyarticles($idArticle);
+            return $control->modifyarticles($idArticle);
         }
     }
 
@@ -29,62 +43,25 @@ function index(){
         if(preg_match("/\/(\d+)$/",$url,$matches))
         {
             $idArticle = $matches[1];
-            return (new Controller)->article($idArticle);
+            return $control->article($idArticle);
         }
     }
 
     if (strpos($url,'delete/comment')) {
         $idArticle = substr($url,16);
-        return (new Controller)->Deletecomms($idArticle);
+        return $control->Deletecomms($idArticle);
         }
 
-    switch ($url)
-    {
-        case '/':
-            return (new Controller)->home();
-        break;
-        case '/logon':
-            return (new Controller)->register();
-        break;
-        case '/login':
-            return (new Controller)->login();
-        break;
-        case '/home':
-            return (new Controller)->home();
-        break;
-        case '/articles':
-            return (new Controller)->articles();
-        break;
-        case '/admin':
-            if ($session['roles'] === 'admin') {
-                return (new Controller)->admin();
-            }
-            return (new Controller)->pages404();
-        break;
-        case '/profil/modify':
-            return (new Controller)->modify();
-        break;
-        case '/profil':
-            return (new Controller)->profil();
-        break;
-        case '/deconnexion':
-            return (new Controller)->deconnexion();
-        break;
-        case '/post/create':
-            if ($session['roles'] === 'admin') {
-                return (new Controller)->newarticles();
-            }
-            return (new Controller)->pages404();
-        break;
-        case '/lost/password':
-            return (new Controller)->PasswordLost();
-        break;
-        case '/lost/login':
-            return (new Controller)->LoginLost();
-        break;
-        default:
-            return (new Controller)->pages404();
+    // page proteger pour les administrateur du site 
+    if($url === "/admin" || $url === "/post/create"){
+        if ($session['roles'] === 'admin') {
+            return $control->$dictionnaire[$url];
+        }
+        return $control->pages404();
     }
+    $newUri = $dictionnaire[$url];
+    // Routeur qui fonctionne pas je sais pas pourquoi
+    return $control->$newUri();
 }
 
 // call Router function

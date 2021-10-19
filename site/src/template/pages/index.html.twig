@@ -19,13 +19,9 @@
         <input class="mt-1 input" name="subject" placeholder="Sujet de la prise de contact" type="text"/>
         <input class="mt-1 input" name="email" placeholder="Votre email" type="email"/>
         <textarea class="mt-1 textarea" name="body" placeholder="Votre question ou demande"></textarea>
-        <button data-sitekey="reCAPTCHA_site_key" data-callback='onSubmit' data-action='submit' class="mt-1 btnprimary g-recaptcha" name="submit" type="submit"/>Envoyer</button>
+        <div class="h-captcha" data-sitekey="318ba5b6-58f1-4f1c-b35b-ccf85f5d916f" ></div>
+        <button class="mt-1 btnprimary g-recaptcha" name="submit" type="submit"/>Envoyer</button>
     </form>
 </div>
-<script src="https://www.google.com/recaptcha/api.js"></script>
-<script>
-    function onSubmit(token) {
-        document.getElementById("forms").submit();
-    }
-</script>
+<script src='https://www.hCaptcha.com/1/api.js' async defer></script>
 {% endblock %}
