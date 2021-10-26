@@ -13,7 +13,6 @@ function index(){
     $url = $_SERVER['REQUEST_URI'];
 
     $dictionnaire = [
-        "/home" =>  "home",
         "/"=> "home",
         "/logon" =>  "register",
         "/login" =>  "login",
@@ -60,7 +59,7 @@ function index(){
         return $control->pages404();
     }
     $newUri = $dictionnaire[$url];
-    // Routeur qui fonctionne pas je sais pas pourquoi
+    // Routeur avec le dico ^^
     return $control->$newUri();
 }
 
