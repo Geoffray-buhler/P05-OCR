@@ -1,24 +1,30 @@
 {% if acctu == 'nomdecompte' %}
-<div style="background-color:#dedede;padding:1rem;">
-    <h2>Cher: {{name}}</h2>
-    <br/>
-    <p>Vous-venez de faire la demande de nom de compte</p>
-    <div style="background-color:red;padding:1rem;">{{msg}}</div>
+<div style="background:linear-gradient(90deg, rgba(66,57,249,1) 0%, rgba(0,212,255,1) 100%);padding:1rem;">
+    <div style="padding:2rem;background:#dedede;">
+        <h2>Cher: {{name}}</h2>
+        <br/>
+        <p>Vous-venez de faire la demande de nom de compte</p>
+        <div style="background-color:#012543;border-radius:15px;color:#fff;padding:1rem;">{{msg}}</div>
+    </div>
 </div>
 {% endif %}
 {% if acctu == 'pswlost' %}
-<div style="background-color:#dedede;padding:1rem;">
-    <h2>{{name}}</h2>
-    <br/>
-    <p>Vous-venez de faire la demande de changement de mot de passe</p>
-    <div style="background-color:red;padding:1rem;">{{msg}}</div>
+<div style="background:linear-gradient(90deg, rgba(66,57,249,1) 0%, rgba(0,212,255,1) 100%);padding:1rem;">
+    <div style="padding:2rem;background:#dedede;">
+        <h2>{{name}}</h2>
+        <br/>
+        <p>Vous-venez de faire la demande de changement de mot de passe</p>
+        <div style="background-color:#012543;border-radius:15px;color:#fff;padding:1rem;">{{msg}}</div>
+    </div>
 </div>
 {% endif %}
 {% if acctu == 'contact' %}
-<div style="background-color:#dedede;padding:1rem;">
-    <h2>{{name}}</h2>
-    <br/>
-    <p>Viens de prendre contact avec vous</p>
-    <div style="background-color:red;padding:1rem;">{{msg}}</div>
+<div style="background:linear-gradient(90deg, rgba(66,57,249,1) 0%, rgba(0,212,255,1) 100%);padding:1rem;">
+    <div style="padding:2rem;background:#dedede;">
+        <h2>{{name}}</h2>
+        <br/>
+        <p>Viens de prendre contact avec vous</p>
+        <div style="background-color:#012543;border-radius:15px;color:#fff;padding:1rem;">{{msg}}</div>
+    </div>
 </div>
 {% endif %}

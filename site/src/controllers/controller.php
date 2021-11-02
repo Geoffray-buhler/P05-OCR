@@ -124,7 +124,7 @@ class Controller
         $template = $this->twig->load('pages/logon.html.twig');
         if (!empty($this->post))
         {
-            $is_ok=[];
+
             $cleanarray = (new Security)->cleanInput($this->post);
             $allusers = (new SQLiteGet($this->conn))->getAllUsers();
 
