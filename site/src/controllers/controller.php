@@ -121,7 +121,7 @@ class Controller
             $cleanarray = (new Security)->cleanInput($this->post);
             $allusers = (new SQLiteGet($this->conn))->getAllUsers();
 
-            foreach ($allusers as $key => $value) {
+            foreach ($allusers as $value) {
                 $userExiste = strtolower($value['login']) == strtolower($cleanarray[0]);
             }
             if (!$userExiste) {
