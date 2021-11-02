@@ -2,9 +2,6 @@
 
 namespace Controller;
 
-use App\Debug;
-
-use Exception;
 use Bdd\SQLiteGet;
 use Bdd\SQLiteSet;
 use Controller\Mail;
@@ -16,10 +13,6 @@ use Bdd\SQLiteCreateTable;
 use Controller\SessionManager;
 use Twig\Loader\FilesystemLoader;
 use Utils\PswGen;
-
-// require dirname(__DIR__).'\..\vendor\autoload.php';
-
-//TODO Capcha pour les mails
 
 class Controller
 {  

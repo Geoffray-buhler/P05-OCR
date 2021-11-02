@@ -3,7 +3,6 @@
 namespace Controller;
 
 use Twig\Environment;
-use PHPMailer\PHPMailer\SMTP;
 use Twig\Loader\FilesystemLoader;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
