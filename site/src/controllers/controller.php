@@ -122,14 +122,15 @@ class Controller
     {
         // load template
         $template = $this->twig->load('pages/logon.html.twig');
-        if (!empty($this->post)) {
-                $is_ok=[];
-                $cleanarray = (new Security)->cleanInput($this->post);
-                $allusers = (new SQLiteGet($this->conn))->getAllUsers();
-                foreach ($allusers as $key => $value) {
-                    $userExiste = strtolower($value['login']) == strtolower($cleanarray[0]);
-                }
+        if (!empty($this->post))
+        {
+            $is_ok=[];
+            $cleanarray = (new Security)->cleanInput($this->post);
+            $allusers = (new SQLiteGet($this->conn))->getAllUsers();
 
+            foreach ($allusers as $key => $value) {
+                $userExiste = strtolower($value['login']) == strtolower($cleanarray[0]);
+            }
             if (!$userExiste) {
                 $password= $cleanarray[2];
                 $confPassword = $cleanarray[3];
@@ -139,31 +140,30 @@ class Controller
                     $cryptedPassword = password_hash($password,PASSWORD_DEFAULT);
                     $sqlite = new SQLiteSet($this->conn);
                     $res = $sqlite->setUser($login,$cryptedPassword,$email);
-                    if($res > 0){
+                    if($res > 0)
+                    {
                         $template = $this->twig->load('pages/login.html.twig');
                         echo $template->render(array('current'=>'login','succes'=>'Votre compte a bien etais crée '));
                     }
-                }
-                else
-                {
+                    else
+                    {
+                        $template = $this->twig->load('pages/logon.html.twig');
+                        echo $template->render(array('current'=>'logon','error'=>'Une erreur ses produite '));
+                    }
+                }else{
                     $template = $this->twig->load('pages/logon.html.twig');
-                    echo $template->render(array('current'=>'logon','error'=>'vous n\'avez pas mis les deux meme mot de passe'));
+                    echo $template->render(array('current'=>'logon','error'=>'Vous n\'avez pas mis les meme mot de passe !'));   
                 }
-            }
-            else
-            {
+            }else{
                 $template = $this->twig->load('pages/logon.html.twig');
-                echo  $template->render(array('current'=>'logon','error'=>'le nom de compte existe deja'));
+                echo $template->render(array('current'=>'logon','error'=>'Ce nom de compte est deja utilisé !'));     
             }
         }
         else
         {
-                // set template variables
-                // render template
-                $template = $this->twig->load('pages/logon.html.twig');
-                echo $template->render(array('current'=>'logon','session'=>$this->session->getSession()
-            ));
-        };
+            $template = $this->twig->load('pages/logon.html.twig');
+            echo $template->render(array('current'=>'logon'));
+        }
     }
 
     function login ()

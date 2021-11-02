@@ -6,11 +6,11 @@
 {% block content %}
     <h1>{{article[0].title}}</h1>
     {{ parent() }}
-    <div class="articleMain">
+    <div class="articleMain d-flex">
     {% if article[0].fileName is defined %}
         <img class="imgpost" src="/uploads/{{article[0].fileName}}" alt="image du post {{article[0].title}}"/>
     {% endif %}
-    <p class="begin">{{ article[0].body }}</p>
+    <p class="begin ml-2">{{ article[0].body }}</p>
     </div>
     {% if comments is not empty %}
     <h3>Commentaire(s)</h3>
