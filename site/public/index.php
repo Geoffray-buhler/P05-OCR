@@ -10,7 +10,9 @@ function index(){
     $session = new SessionManager();
     $session = $session->getSession();
 
-    $url = filter_var($_SERVER['REQUEST_URI']);
+    if(isset($_SERVER)){
+        $url = filter_var($_SERVER['REQUEST_URI']);
+    }
 
     $dictionnaire = [
         "/"=> "home",
