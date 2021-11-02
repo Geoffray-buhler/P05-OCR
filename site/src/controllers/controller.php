@@ -150,11 +150,15 @@ class Controller
                         $template = $this->twig->load('pages/logon.html.twig');
                         echo $template->render(array('current'=>'logon','error'=>'Une erreur ses produite '));
                     }
-                }else{
+                }
+                else
+                {
                     $template = $this->twig->load('pages/logon.html.twig');
                     echo $template->render(array('current'=>'logon','error'=>'Vous n\'avez pas mis les meme mot de passe !'));   
                 }
-            }else{
+            }
+            else
+            {
                 $template = $this->twig->load('pages/logon.html.twig');
                 echo $template->render(array('current'=>'logon','error'=>'Ce nom de compte est deja utilisé !'));     
             }
