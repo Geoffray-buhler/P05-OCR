@@ -15,13 +15,15 @@
 <div class="d-flex column w80p">
     <h2>Pour prendre contact utilisez ce formulaire</h2>
     <form id="forms" class="d-flex column" action="#" method="POST">
-        <input class="mt-1 input" name="name" placeholder="Votre pseudo" type="text"/>
-        <input class="mt-1 input" name="subject" placeholder="Sujet de la prise de contact" type="text"/>
-        <input class="mt-1 input" name="email" placeholder="Votre email" type="email"/>
-        <textarea class="mt-1 textarea" name="body" placeholder="Votre question ou demande"></textarea>
-        <div class="h-captcha" data-sitekey="318ba5b6-58f1-4f1c-b35b-ccf85f5d916f" ></div>
-        <button class="mt-1 btnprimary g-recaptcha" name="submit" type="submit">Envoyer</button>
+        <label for="name" class="sr-only">Votre noms</label>
+        <input class="mt-1 input" id="name" name="name" placeholder="Votre pseudo" type="text"/>
+        <label for="subject" class="sr-only">Sujet de la prise de contact</label>
+        <input class="mt-1 input" id="subject" name="subject" placeholder="Sujet de la prise de contact" type="text"/>
+        <label for="email" class="sr-only">Votre email</label>
+        <input class="mt-1 input" id="email" name="email" placeholder="Votre email" type="email"/>
+        <label for="body" class="sr-only">Votre message</label>
+        <textarea id="body" class="mt-1 textarea" name="body" placeholder="Votre question ou demande"></textarea>
+        <input class="mt-1 btnprimary" name="submit" type="submit" value="Envoyer"></input>
     </form>
 </div>
-<script src='https://www.hCaptcha.com/1/api.js' async defer></script>
 {% endblock %}
