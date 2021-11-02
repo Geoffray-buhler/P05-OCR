@@ -3,6 +3,7 @@
 namespace Controller;
 
 use Twig\Environment;
+use PHPMailer\PHPMailer\SMTP;
 use Twig\Loader\FilesystemLoader;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -13,7 +14,7 @@ class Mail
 
     function __construct($name,$email,$msg,$subject,$raisonEmail,$AdressToSend,$template,$acctu)
     {
-        require '../env.php';
+        include __DIR__.'/../env.php';
         // le dossier ou on trouve les templates
         $loader = new FilesystemLoader('../src/template');
         

@@ -126,19 +126,11 @@ class Controller
                 $is_ok=[];
                 $cleanarray = (new Security)->cleanInput($this->post);
                 $allusers = (new SQLiteGet($this->conn))->getAllUsers();
-                
-                if (!empty($allusers)) {
-                    for ($i=0; $i <count($allusers) ; $i++) {
-                        if ($allusers[$i] === $cleanarray[0]) {
-                            array_push($is_ok,0);
-                            return;
-                        }
-                        array_push($is_ok,1);
-                    }
-                    return;
+                foreach ($allusers as $key => $value) {
+                    $userExiste = strtolower($value['login']) == strtolower($cleanarray[0]);
                 }
-                array_push($is_ok,0);
-            if (array_sum($is_ok) === 0) {
+
+            if (!$userExiste) {
                 $password= $cleanarray[2];
                 $confPassword = $cleanarray[3];
                 if ($password === $confPassword) {
@@ -148,24 +140,21 @@ class Controller
                     $sqlite = new SQLiteSet($this->conn);
                     $res = $sqlite->setUser($login,$cryptedPassword,$email);
                     if($res > 0){
-                        $this->session->setSession('succes','Votre compte a bien etais créé');
-                        header("Location: /login");
-                    }
-                    else
-                    {
-                        $this->session->setSession('error','Votre compte a pas etais créé');
-                        header("Location: /");
+                        $template = $this->twig->load('pages/login.html.twig');
+                        echo $template->render(array('current'=>'login','succes'=>'Votre compte a bien etais crée '));
                     }
                 }
                 else
                 {
                     $template = $this->twig->load('pages/logon.html.twig');
-                    echo $template->render(array('current'=>'logon','error'=>'vous n\'avez pas mis les deux meme mot de passe'));}
+                    echo $template->render(array('current'=>'logon','error'=>'vous n\'avez pas mis les deux meme mot de passe'));
+                }
             }
             else
             {
                 $template = $this->twig->load('pages/logon.html.twig');
-                echo  $template->render(array('current'=>'logon','error'=>'le nom de compte existe deja'));}
+                echo  $template->render(array('current'=>'logon','error'=>'le nom de compte existe deja'));
+            }
         }
         else
         {
@@ -250,7 +239,7 @@ class Controller
                 $psw = (new PswGen)->generation(20);
                 $cryptedPassword = password_hash($psw,PASSWORD_DEFAULT);
                 $sqlset->updateUser($useracc[0]['id'],$cryptedPassword);
-                new Mail($useracc[0]['login'],'griffont39@alwaysdata.net','Votre nouveau mot de passe est : '.$psw,'Oubliez pas de modifier ce Mot de passe lors de votre prochaine connexion !!!','Nouveau mot de passe',$this->post[1],$template,'pswlost');
+                new Mail($useracc[0]['login'],'contact@griffont39.yn.lu','Votre nouveau mot de passe est : '.$psw,'Oubliez pas de modifier ce Mot de passe lors de votre prochaine connexion !!!','Nouveau mot de passe',$this->post[1],$template,'pswlost');
             }
         }
         // set template variables
@@ -270,7 +259,7 @@ class Controller
             $sqget = new SQLiteGet($this->conn);
             $user = $sqget->getUserWithEmail($this->post[0]);
             if ($user) {
-                new Mail($user[0]['login'],'griffont39@alwaysdata.net',"Voici votre nom de compte : ".$user[0]['login'],"Votre nom de compte",'Nom de compte',$user[0]["email"],$template,'nomdecompte');
+                new Mail($user[0]['login'],'contact@griffont39.yn.lu',"Voici votre nom de compte : ".$user[0]['login'],"Votre nom de compte",'Nom de compte',$user[0]["email"],$template,'nomdecompte');
             }
             else
             {
