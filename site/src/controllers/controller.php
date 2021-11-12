@@ -15,7 +15,7 @@ use Twig\Loader\FilesystemLoader;
 use Utils\PswGen;
 
 class Controller
-{  
+{
     public $twig;
     public $conn;
     public $post;
@@ -59,7 +59,7 @@ class Controller
             $this->post["subject"] = filter_var($this->post[1],FILTER_DEFAULT);  
             $this->post["email"] = $this->post[2];
             $this->post["body"] = filter_var($this->post[3],FILTER_DEFAULT);
-            new Mail($this->post["name"],$this->post["email"],$this->post["body"],$this->post["subject"],'Contact blog !','seigneur39@gmail.com',$template,'contact');
+            new Mail($this->post["name"],$this->post["email"],$this->post["body"],$this->post["subject"],'Contact blog !','contact@griffont39.yn.lu',$template,'contact');
         };
             echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession()]);
     }
@@ -147,7 +147,7 @@ class Controller
                 else
                 {
                     $template = $this->twig->load('pages/logon.html.twig');
-                    echo $template->render(array('current'=>'logon','error'=>'Vous n\'avez pas mis les meme mot de passe !'));   
+                    echo $template->render(array('current'=>'logon','error'=>'Vous n\'avez pas mis les même mot de passe !'));   
                 }
             }
             else
@@ -306,10 +306,10 @@ class Controller
                 }
             }
         }
-        
+
         // load template
         $template = $this->twig->load('pages/modify.html.twig');
-    
+
         // set template variables
         // render template
         echo $template->render(array('current'=>'modify','session'=>$infos_user

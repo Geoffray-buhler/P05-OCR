@@ -56,7 +56,8 @@ function index(){
     // page proteger pour les administrateur du site 
     if($url === "/admin" || $url === "/post/create"){
         if ($session['roles'] === 'admin') {
-            return $control->$dictionnaire[$url];
+            $newUri = $dictionnaire[$url];
+            return $control->$newUri();
         }
         return $control->pages404();
     }
