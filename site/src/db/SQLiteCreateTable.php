@@ -43,6 +43,7 @@ class SQLiteCreateTable {
                 body TEXT NOT NULL,
                 users_id INTEGER,
                 articles_id INTEGER,
+                valide VARCHAR (20) NOT NULL,
                 FOREIGN KEY (users_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
                 FOREIGN KEY (articles_id) REFERENCES articles(id) ON UPDATE CASCADE ON DELETE CASCADE
             )'

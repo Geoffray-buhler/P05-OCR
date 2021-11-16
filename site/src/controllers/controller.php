@@ -2,17 +2,18 @@
 
 namespace Controller;
 
+use Utils\PswGen;
 use Bdd\SQLiteGet;
 use Bdd\SQLiteSet;
 use Controller\Mail;
 use Bdd\SQLiteDelete;
+use Bdd\SQLiteUpdate;
 use Twig\Environment;
 use Controller\Security;
 use Bdd\SQLiteConnection;
 use Bdd\SQLiteCreateTable;
 use Controller\SessionManager;
 use Twig\Loader\FilesystemLoader;
-use Utils\PswGen;
 
 class Controller
 {
@@ -51,8 +52,8 @@ class Controller
 
     function home ()
     {
-        // load template
         $template = $this->twig->load('pages/index.html.twig');
+        $message = [];
 
         if(!empty($this->post[0]) && !empty($this->post[1]) && !empty($this->post[2]) && !empty($this->post[3])){
             $this->post["name"] = filter_var($this->post[0],FILTER_DEFAULT); 
@@ -60,19 +61,16 @@ class Controller
             $this->post["email"] = $this->post[2];
             $this->post["body"] = filter_var($this->post[3],FILTER_DEFAULT);
             new Mail($this->post["name"],$this->post["email"],$this->post["body"],$this->post["subject"],'Contact blog !','contact@griffont39.yn.lu',$template,'contact');
+            $message = 'Votre message est bien parti';
         };
-            echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession()]);
+            echo $template->render(['current'=>'home' , 'session'=>$this->session->getSession(),'succes'=>$message]);
     }
 
     function articles ()
     {
-        // load template
         $template = $this->twig->load('pages/articles.html.twig');
-        // getAllArticle
         $sqlite = new SQLiteGet($this->conn);
         $articles = $sqlite->getAllArticles();
-        // set template variables
-        // render template
         echo $template->render(['current'=>'articles' , 'session'=>$this->session->getSession() , 'articles'=>$articles
         ]);
     }
@@ -92,35 +90,30 @@ class Controller
             $article_id = $cleanarray[2];
             $users_id = $cleanarray[3];
             $sqlite = new SQLiteSet($this->conn);
-            $sqlite->setComment($title,$body,$users_id,$article_id);
+            $sqlite->setComment($title,$body,$users_id,$article_id,);
         }
-        // set template variables
-        // render template
         echo $template->render(array('session'=>$this->session->getSession(),'article' => $article,'comments'=>$comments
         ));
     }
 
     function pages404 ()
     {
-        // load template
+
         $template = $this->twig->load('pages/404.html.twig');
-    
-        // set template variables
-        // render template
+
         echo $template->render(array('session'=>$this->session->getSession()
         ));
     }
 
     function register ()
     {
-        // load template
+
         $template = $this->twig->load('pages/logon.html.twig');
         if (!empty($this->post))
         {
-
             $cleanarray = (new Security)->cleanInput($this->post);
             $allusers = (new SQLiteGet($this->conn))->getAllUsers();
-
+            $userExiste = null;
             foreach ($allusers as $value) {
                 $userExiste = strtolower($value['login']) == strtolower($cleanarray[0]);
             }
@@ -167,6 +160,7 @@ class Controller
     {
         // load template
         $template = $this->twig->load('pages/login.html.twig');
+        $thispageInfos = ['current'=>'login','session'=>$this->session->getSession()];
         if (!empty($this->post)) {
             $this->post['login'] = $this->post[0];
             $this->post['password'] = $this->post[1];
@@ -174,8 +168,8 @@ class Controller
             $password = $this->post['password'];
             $sqlite = new SQLiteGet($this->conn);
             $res = $sqlite->getUser($login);
-            $res = $res[0];
             if (!empty($res)) {
+                $res = $res[0];
                 $verif = password_verify($password,$res['password']);
                 if ($verif == true) {
                     $role = $res['type'];
@@ -189,14 +183,12 @@ class Controller
             }
             else
             {
-                echo "ce compte existe pas !!!";
+                $thispageInfos = ['current'=>'login','session'=>$this->session->getSession(),'error'=>'Ce compte n\'existe pas'];
             }
         }
-
-        // set template variables
-        // render template
-        echo $template->render(array('current'=>'login','session'=>$this->session->getSession()
-        ));
+        echo $template->render(
+            $thispageInfos
+        );
     }
 
     function deconnexion()
@@ -212,23 +204,28 @@ class Controller
         $posts = $sqget->getAllArticles();
         $users = $sqget->getAllUsers();
         if(!empty($this->post)){
-
         }
-        // load template
         $template = $this->twig->load('pages/admin.html.twig');
-    
-        // set template variables
-        // render template
         echo $template->render(['current'=>'admin','session'=>$this->session->getSession(),'posts'=>$posts,'users'=>$users
+        ]);
+    }
+
+    function gestionCommentaire()
+    {
+        $sqget = new SQLiteGet($this->conn);
+        $comments = $sqget->getAllComments();
+        if(!empty($this->post)){
+        }
+        $template = $this->twig->load('pages/comments.html.twig');
+        echo $template->render(['current'=>'admin','session'=>$this->session->getSession(),'comments'=>$comments
         ]);
     }
 
     function PasswordLost()
     {
-        // load template
         $template = $this->twig->load('pages/lost.html.twig');
+        $thispageInfos = ['current'=>'mdplost'];
         if(!empty($this->post)){
-
             $sqget = new SQLiteGet($this->conn);
             $useracc = $sqget->getUserFromLogAndMail($this->post[0],$this->post[1]);
             if($useracc){
@@ -237,34 +234,35 @@ class Controller
                 $cryptedPassword = password_hash($psw,PASSWORD_DEFAULT);
                 $sqlset->updateUser($useracc[0]['id'],$cryptedPassword);
                 new Mail($useracc[0]['login'],'contact@griffont39.yn.lu','Votre nouveau mot de passe est : '.$psw,'Oubliez pas de modifier ce Mot de passe lors de votre prochaine connexion !!!','Nouveau mot de passe',$this->post[1],$template,'pswlost');
+                $thispageInfos = ['current'=>'mdplost','succes'=>'Vous allez recevoir un mail avec un mot de passe temporaire veuillez le changer s\'il vous plait'];
+            }else{
+                $thispageInfos = ['current'=>'mdplost','error'=>'Ce compte n\'existe pas '];
             }
         }
-        // set template variables
-        // render template
-        echo $template->render(array('current'=>'mdplost'
-        ));
+        echo $template->render(
+            $thispageInfos
+        );
     }
 
     function LoginLost()
     {
-        // load template
         $template = $this->twig->load('pages/lostgin.html.twig');
-    
-        // set template variables
-        // render template
+        $thispageInfos = ['current'=>'mdplost'];
         if(!empty($this->post)){
             $sqget = new SQLiteGet($this->conn);
             $user = $sqget->getUserWithEmail($this->post[0]);
             if ($user) {
                 new Mail($user[0]['login'],'contact@griffont39.yn.lu',"Voici votre nom de compte : ".$user[0]['login'],"Votre nom de compte",'Nom de compte',$user[0]["email"],$template,'nomdecompte');
+                $thispageInfos = ['current'=>'mdplost','succes'=>'Un email vous a été envoyer'];
             }
             else
             {
-                echo "cette adresse email existe pas !";
+                $thispageInfos = ['current'=>'mdplost','error'=>'Cette adresse email existe pas !'];
             }
         }
-        echo $template->render(array('current'=>'mdplost'
-        ));
+        echo $template->render(
+            $thispageInfos
+        );
     }
 
     function profil()
@@ -275,11 +273,7 @@ class Controller
             $sqlite->DeleteUser($infos_user['id']);
             header("Location: /");
         }
-        // load template
         $template = $this->twig->load('pages/profil.html.twig');
-    
-        // set template variables
-        // render template
         echo $template->render(array('current'=>'profil','session'=>$infos_user
         ));
     }
@@ -289,7 +283,6 @@ class Controller
         $infos_user = $this->session->getSession();
         $sqlite = new SQLiteGet($this->conn);
         $user_info_bdd = $sqlite->getUser($infos_user['login']);
-
         if(isset($this->post["changepassword"])){
            $verif = password_verify($this->post['old_password'],$user_info_bdd['password']);
            if($verif === true){
@@ -306,12 +299,7 @@ class Controller
                 }
             }
         }
-
-        // load template
         $template = $this->twig->load('pages/modify.html.twig');
-
-        // set template variables
-        // render template
         echo $template->render(array('current'=>'modify','session'=>$infos_user
         ));
     }
@@ -319,7 +307,7 @@ class Controller
     function newarticles()
     {
         $infos_user = $this->session->getSession();
-        if (isset($this->post)) {
+        if (isset($this->post)){
             if(isset($_FILES['file'])){
                 $tmpName = $_FILES['file']['tmp_name'];
                 $name = $this->session->session['login'].$this->session->session['id'].$_FILES['file']['name'];
@@ -332,12 +320,8 @@ class Controller
             $sqlite->setArticles($articleTitle,$articleBody,$userId,$name);
             $this->session->setSession('succes','Votre article est bien poster');
             header("Location: /");
-        } 
-        // load template
+        }
         $template = $this->twig->load('pages/createdArticles.html.twig');
-    
-        // set template variables
-        // render template
         echo $template->render(array('current'=>'createdArticles','session'=>$infos_user
         ));
     }
@@ -347,6 +331,7 @@ class Controller
         $infos_user = $this->session->getSession();
         $sqlite = new SQLiteGet($this->conn);
         $article = $sqlite->getArticle($idArticle);
+        $message = [];
         if (isset($this->post)) {
             if(isset($_FILES['file'])){
                 $tmpName = $_FILES['file']['tmp_name'];
@@ -358,24 +343,23 @@ class Controller
             $userId = $this->session->session['id'];
             $sqlite = new SQLiteSet($this->conn);
             $sqlite->updateArticles($articleTitle,$articleBody,$userId,$name,$idArticle);
-            $this->session->setSession('succes','Votre article est bien poster');
+            $message ='Votre article est bien poster';
             header("Location: /");
         }
-        // load template
         $template = $this->twig->load('pages/createdArticles.html.twig');
-    
-        // set template variables
-        // render template
-        echo $template->render(array('current'=>'createdArticles','session'=>$infos_user,'article'=>$article
+        echo $template->render(array('current'=>'createdArticles','session'=>$infos_user,'article'=>$article,'succes'=>$message
         ));
     }
 
-    function Deletecomms($idComms){
-
-        $sqlite = new SQLiteGet($this->conn);
-
+    function Deletecomms($idComms,$page){
         $sqlite = new SQLiteDelete($this->conn);
         $sqlite->DeleteComment($idComms);
-        header("Location: /articles");
+        header("Location: ".$page);
+    }
+
+    function Validcomms($idComms){
+        $sqlite = new SQLiteUpdate($this->conn);
+        $sqlite->ValidComment($idComms);
+        header("Location: /admin/comments");
     }
 }

@@ -35,11 +35,24 @@ class SQLiteGet {
      * get the articles list in the database
      */
     public function getAllCommentFromArticle($article_id) {
-        $sql = "SELECT id,title,body FROM comments WHERE articles_id=:articles_id";
+        $sql = "SELECT id,title,body,valide FROM comments WHERE articles_id=:articles_id";
         $stmt = $this->pdo->prepare($sql);
         $result = $stmt->execute([
             ":articles_id"=> $article_id
         ]);
+        if ($result) { 
+            $result = $stmt->fetchAll();
+        }
+        return $result;
+    }
+
+    /**
+    * get all comments in the database
+    */
+    public function getAllComments() {
+        $sql = "SELECT id,title,body,valide FROM comments";
+        $stmt = $this->pdo->prepare($sql);
+        $result = $stmt->execute();
         if ($result) { 
             $result = $stmt->fetchAll();
         }

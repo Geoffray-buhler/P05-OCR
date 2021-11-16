@@ -11,6 +11,8 @@
 {{ parent() }}
 <h2>Gestion des posts</h2>
 <a aria-label="Crée un nouvel article" href="/post/create" class="btn-blue">Crée un nouvel article</a>
+<h2>Gestion des commentaires</h2>
+<a aria-label="Gestion des commentaires" href="/admin/comments" class="btn-blue mt-1 mb-1">Gerer les commentaires</a>
 <h3>Modifiers les articles</h3>
     {% for post in posts %}
         <a aria-label="Modifier un article" href="/post/modify/{{post.id}}" class="btn-warning">{{post.title}}</a>

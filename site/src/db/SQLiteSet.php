@@ -51,7 +51,7 @@ class SQLiteSet {
     * set an commentary in BDD
     */
     public function setComment($title,$body,$users_id,$article_id) {
-        $sql = 'INSERT INTO comments(title,body,users_id,articles_id) VALUES(:title,:body,:users_id,:articles_id)';
+        $sql = 'INSERT INTO comments(title,body,users_id,articles_id,valide) VALUES(:title,:body,:users_id,:articles_id,"Not")';
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             ':title'=> $title,

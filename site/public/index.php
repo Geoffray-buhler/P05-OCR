@@ -26,6 +26,7 @@ function index(){
         "/post/create" =>  "newarticles",
         "/lost/password" =>  "PasswordLost",
         "/lost/login"=> "LoginLost",
+        "/admin/comments"=>"gestionCommentaire",
     ];
 
     $control = new Controller;
@@ -50,11 +51,20 @@ function index(){
 
     if (strpos($url,'delete/comment')) {
         $idArticle = substr($url,16);
-        return $control->Deletecomms($idArticle);
+        $wherecome = $_SERVER['HTTP_REFERER'];
+        if (strpos($wherecome,"admin")) {
+            return $control->Deletecomms($idArticle,"/admin/comments");
         }
+        return $control->Deletecomms($idArticle,"/articles");
+    }
+    
+    if (strpos($url,'valid/comment')) {
+        $idComment = substr($url,15);
+        return $control->Validcomms($idComment);
+    }
 
     // page proteger pour les administrateur du site 
-    if($url === "/admin" || $url === "/post/create"){
+    if($url === "/admin" || $url === "/post/create" || $url === "/admin/comments"){
         if ($session['roles'] === 'admin') {
             $newUri = $dictionnaire[$url];
             return $control->$newUri();

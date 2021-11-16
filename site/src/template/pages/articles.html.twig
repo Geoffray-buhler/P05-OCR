@@ -21,7 +21,7 @@
         {% for article in articles %}
         <div class="articleMain mb-1">
             <a aria-label="Article {{article.title}}" href='/post/{{article.id}}'>
-                <h2 class="center">{{article.title}}</h2>
+                <h2 class="center white">{{article.title}}</h2>
                 <h4 class="begin">{{article.body|length > 150 ? article.body|slice(0, 150) ~ '...' : article.body  }}</h4>
             </a>
         </div>

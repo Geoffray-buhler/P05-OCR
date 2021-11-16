@@ -1,0 +1,24 @@
+{% extends "/Base.html.twig" %}
+
+{% block title %}Administration{% endblock %}
+
+{% block head %}
+{{ parent() }}
+{% endblock %}
+
+{% block content %}
+<h1>Gestion des commentaires</h1>
+{{ parent() }}
+{% for comment in comments %}
+{% if comment.valide != "ok" %}
+<div class="d-flex comment">
+    <h3>{{comment.title}}</h3>
+    <p>{{comment.body}}</p>
+    <div>
+        <a aria-label="Supprimer un commentaire" href="/delete/comment/{{comment.id}}" class="btn-warning"><i class="fas fa-times"></i></a>
+        <a aria-label="Valider un commentaire" href="/valid/comment/{{comment.id}}" class="btn-succes"><i class="fas fa-check"></i></a>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endblock %}
